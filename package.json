@@ -1,0 +1,14 @@
+{
+  "name": "playbook-frontend",
+  "version": "1.0.0",
+  "description": "Frontend do PlayBook - catalogo de estrategias de CS2 (HTML + CSS + TypeScript)",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "serve": "live-server --port=5500"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "live-server": "^1.2.2"
+  }
+}
