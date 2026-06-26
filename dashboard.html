@@ -14,13 +14,22 @@
   </header>
 
   <main class="dashboard">
+    <p class="error-message" id="error-message"></p>
+
     <section class="dashboard-section">
-      <h2>Minhas Plays</h2>
+      <div class="section-header">
+        <h2>Minhas Plays</h2>
+        <a href="play-form.html" class="button-link">+ Nova Play</a>
+      </div>
+      <p><a href="plays-list.html">Ver plays públicas de todos os usuários →</a></p>
       <ul id="plays-list" class="card-list"></ul>
     </section>
 
     <section class="dashboard-section">
-      <h2>Meus Playbooks</h2>
+      <div class="section-header">
+        <h2>Meus Playbooks</h2>
+        <a href="playbook-form.html" class="button-link">+ Novo Playbook</a>
+      </div>
       <ul id="playbooks-list" class="card-list"></ul>
     </section>
   </main>

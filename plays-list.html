@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayBook — Plays</title>
+  <link rel="stylesheet" href="src/css/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <span class="navbar-title">PlayBook</span>
+    <a href="dashboard.html">Voltar ao dashboard</a>
+  </header>
+
+  <main class="page">
+    <h1>Plays públicas</h1>
+
+    <form id="filter-form" class="filter-form">
+      <input type="text" id="search" name="search" placeholder="Buscar por título ou descrição" />
+      <select id="map-filter" name="map">
+        <option value="">Todos os mapas</option>
+      </select>
+      <button type="submit">Filtrar</button>
+    </form>
+
+    <p class="error-message" id="error-message"></p>
+    <ul id="plays-list" class="card-list"></ul>
+  </main>
+
+  <script type="module" src="dist/js/plays.js"></script>
+</body>
+</html>

@@ -56,6 +56,40 @@ interface Playbook {
   updated_at: string;
 }
 
+const PLAY_MAPS: { value: string; label: string }[] = [
+  { value: 'mirage', label: 'Mirage' },
+  { value: 'inferno', label: 'Inferno' },
+  { value: 'dust2', label: 'Dust 2' },
+  { value: 'nuke', label: 'Nuke' },
+  { value: 'overpass', label: 'Overpass' },
+  { value: 'ancient', label: 'Ancient' },
+  { value: 'anubis', label: 'Anubis' },
+  { value: 'vertigo', label: 'Vertigo' },
+  { value: 'train', label: 'Train' },
+];
+
+interface PlayPayload {
+  title: string;
+  description: string;
+  content: string;
+  visibility: Visibility;
+  map: string;
+  video_url: string;
+  players_required: number;
+  smokes: number;
+  flashbangs: number;
+  he_grenades: number;
+  molotovs: number;
+  decoys: number;
+}
+
+interface PlaybookPayload {
+  title: string;
+  description: string;
+  visibility: Visibility;
+  plays: number[];
+}
+
 function saveTokens(tokens: AuthTokens): void {
   localStorage.setItem('access_token', tokens.access);
   localStorage.setItem('refresh_token', tokens.refresh);
@@ -169,6 +203,86 @@ async function getMyPlaybooks(): Promise<PaginatedResponse<Playbook>> {
   return response.json();
 }
 
+async function getPlays(params: Record<string, string> = {}): Promise<PaginatedResponse<Play>> {
+  const query = new URLSearchParams(params).toString();
+  const response = await apiFetch(`/plays/${query ? `?${query}` : ''}`);
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function getPlay(id: number): Promise<Play> {
+  const response = await apiFetch(`/plays/${id}/`);
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function createPlay(payload: PlayPayload): Promise<Play> {
+  const response = await apiFetch('/plays/', { method: 'POST', body: JSON.stringify(payload) });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function updatePlay(id: number, payload: PlayPayload): Promise<Play> {
+  const response = await apiFetch(`/plays/${id}/`, { method: 'PUT', body: JSON.stringify(payload) });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function deletePlay(id: number): Promise<void> {
+  const response = await apiFetch(`/plays/${id}/`, { method: 'DELETE' });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+}
+
+async function getPlaybooks(params: Record<string, string> = {}): Promise<PaginatedResponse<Playbook>> {
+  const query = new URLSearchParams(params).toString();
+  const response = await apiFetch(`/playbooks/${query ? `?${query}` : ''}`);
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function getPlaybook(id: number): Promise<Playbook> {
+  const response = await apiFetch(`/playbooks/${id}/`);
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function createPlaybook(payload: PlaybookPayload): Promise<Playbook> {
+  const response = await apiFetch('/playbooks/', { method: 'POST', body: JSON.stringify(payload) });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function updatePlaybook(id: number, payload: PlaybookPayload): Promise<Playbook> {
+  const response = await apiFetch(`/playbooks/${id}/`, { method: 'PUT', body: JSON.stringify(payload) });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  return response.json();
+}
+
+async function deletePlaybook(id: number): Promise<void> {
+  const response = await apiFetch(`/playbooks/${id}/`, { method: 'DELETE' });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+}
+
 export {
   API_BASE_URL,
   apiFetch,
@@ -181,7 +295,18 @@ export {
   getStoredUser,
   getMyPlays,
   getMyPlaybooks,
+  getPlays,
+  getPlay,
+  createPlay,
+  updatePlay,
+  deletePlay,
+  getPlaybooks,
+  getPlaybook,
+  createPlaybook,
+  updatePlaybook,
+  deletePlaybook,
   saveTokens,
   clearTokens,
+  PLAY_MAPS,
 };
-export type { AuthUser, Play, Playbook, PaginatedResponse };
+export type { AuthUser, Play, Playbook, PaginatedResponse, PlayPayload, PlaybookPayload };

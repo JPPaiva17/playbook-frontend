@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayBook — Play</title>
+  <link rel="stylesheet" href="src/css/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <span class="navbar-title">PlayBook</span>
+    <a href="dashboard.html">Voltar ao dashboard</a>
+  </header>
+
+  <main class="page">
+    <h1 id="page-title">Nova Play</h1>
+    <p class="error-message" id="error-message"></p>
+    <form id="play-form" class="wide-form">
+      <div class="form-field">
+        <label for="title">Título</label>
+        <input type="text" id="title" name="title" required maxlength="255" />
+      </div>
+
+      <div class="form-field">
+        <label for="map">Mapa</label>
+        <select id="map" name="map">
+          <option value="">Selecione um mapa</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="description">Descrição curta</label>
+        <textarea id="description" name="description" rows="2"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="content">Conteúdo / passo a passo</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="video_url">Link do vídeo (YouTube)</label>
+        <input type="url" id="video_url" name="video_url" placeholder="https://youtube.com/watch?v=..." />
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="players_required">Jogadores necessários</label>
+          <input type="number" id="players_required" name="players_required" min="1" max="5" value="5" />
+        </div>
+        <div class="form-field">
+          <label for="visibility">Visibilidade</label>
+          <select id="visibility" name="visibility">
+            <option value="public">Pública</option>
+            <option value="private">Privada</option>
+          </select>
+        </div>
+      </div>
+
+      <fieldset class="grenade-fieldset">
+        <legend>Granadas necessárias</legend>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="smokes">Smokes</label>
+            <input type="number" id="smokes" name="smokes" min="0" value="0" />
+          </div>
+          <div class="form-field">
+            <label for="flashbangs">Flashbangs</label>
+            <input type="number" id="flashbangs" name="flashbangs" min="0" value="0" />
+          </div>
+          <div class="form-field">
+            <label for="he_grenades">HE Grenades</label>
+            <input type="number" id="he_grenades" name="he_grenades" min="0" value="0" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="molotovs">Molotovs</label>
+            <input type="number" id="molotovs" name="molotovs" min="0" value="0" />
+          </div>
+          <div class="form-field">
+            <label for="decoys">Decoys</label>
+            <input type="number" id="decoys" name="decoys" min="0" value="0" />
+          </div>
+        </div>
+      </fieldset>
+
+      <button type="submit" id="submit-button">Salvar</button>
+    </form>
+  </main>
+
+  <script type="module" src="dist/js/play-form.js"></script>
+</body>
+</html>
