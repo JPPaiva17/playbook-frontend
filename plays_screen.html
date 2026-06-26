@@ -32,10 +32,10 @@
       </nav>
 
       <div class="appbar__actions">
-        <a href="play_form.html" class="btn-create">
+        <button class="btn-create" id="open-create-modal">
           <i data-lucide="plus"></i>
           <span>Criar Play</span>
-        </a>
+        </button>
 
         <div class="avatar-wrapper">
           <button class="avatar-btn" id="avatar-btn" aria-expanded="false" aria-haspopup="true">
@@ -83,13 +83,101 @@
           Minhas Plays
           <span class="section-count" id="count-plays">0</span>
         </h2>
-        <a href="play_form.html" class="dash-link">
+        <button class="dash-link" id="open-create-modal-2" style="background:none;border:none;cursor:pointer;font-size:inherit;">
           <i data-lucide="plus"></i> Nova play
-        </a>
+        </button>
       </div>
       <div id="plays-list" class="item-grid"></div>
     </section>
   </main>
+
+  <!-- Modal: criar / editar play -->
+  <div class="modal-overlay" id="play-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="modal-title">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-title">Nova Play</h2>
+        <button class="modal__close" id="modal-close" aria-label="Fechar">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <p class="modal__error" id="modal-error"></p>
+
+      <form id="play-form" class="modal__form">
+        <div class="modal__row">
+          <div class="modal__field">
+            <label for="title">Título</label>
+            <input class="modal__input" type="text" id="title" name="title" required maxlength="255" />
+          </div>
+          <div class="modal__field">
+            <label for="map">Mapa</label>
+            <select class="modal__input" id="map" name="map">
+              <option value="">Selecione um mapa</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal__field">
+          <label for="description">Descrição curta</label>
+          <textarea class="modal__input" id="description" name="description" rows="2"></textarea>
+        </div>
+
+        <div class="modal__field">
+          <label for="content">Passo a passo</label>
+          <textarea class="modal__input" id="content" name="content" rows="4" required></textarea>
+        </div>
+
+        <div class="modal__row">
+          <div class="modal__field">
+            <label for="video_url">Link do vídeo</label>
+            <input class="modal__input" type="url" id="video_url" name="video_url" placeholder="https://youtube.com/..." />
+          </div>
+          <div class="modal__field">
+            <label for="players_required">Jogadores</label>
+            <input class="modal__input" type="number" id="players_required" name="players_required" min="1" max="5" value="5" />
+          </div>
+          <div class="modal__field">
+            <label for="visibility">Visibilidade</label>
+            <select class="modal__input" id="visibility" name="visibility">
+              <option value="public">Pública</option>
+              <option value="private">Privada</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="modal__fieldset">
+          <legend>Granadas</legend>
+          <div class="modal__row">
+            <div class="modal__field">
+              <label for="smokes">Smokes</label>
+              <input class="modal__input" type="number" id="smokes" min="0" value="0" />
+            </div>
+            <div class="modal__field">
+              <label for="flashbangs">Flashbangs</label>
+              <input class="modal__input" type="number" id="flashbangs" min="0" value="0" />
+            </div>
+            <div class="modal__field">
+              <label for="he_grenades">HE</label>
+              <input class="modal__input" type="number" id="he_grenades" min="0" value="0" />
+            </div>
+            <div class="modal__field">
+              <label for="molotovs">Molotovs</label>
+              <input class="modal__input" type="number" id="molotovs" min="0" value="0" />
+            </div>
+            <div class="modal__field">
+              <label for="decoys">Decoys</label>
+              <input class="modal__input" type="number" id="decoys" min="0" value="0" />
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="modal__footer">
+          <button type="button" class="modal__btn-cancel" id="modal-cancel">Cancelar</button>
+          <button type="submit" class="modal__btn-submit" id="submit-button">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>lucide.createIcons();</script>
