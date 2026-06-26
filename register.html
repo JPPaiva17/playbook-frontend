@@ -21,12 +21,32 @@
           <input type="email" id="email" name="email" required autocomplete="email" />
         </div>
         <div class="form-field">
+          <label for="phone">Celular (DDD + número)</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            autocomplete="tel"
+            placeholder="21987654321"
+            pattern="\d{10,11}"
+            title="Somente dígitos, com DDD (ex: 21987654321)"
+          />
+        </div>
+        <div class="form-field">
           <label for="password">Senha</label>
-          <input type="password" id="password" name="password" required autocomplete="new-password" />
+          <div class="password-field">
+            <input type="password" id="password" name="password" required autocomplete="new-password" />
+            <button type="button" class="password-toggle" id="password-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
+          </div>
+          <small class="field-hint">Mín. 8 caracteres, 1 maiúscula, 1 minúscula e 1 caractere especial.</small>
         </div>
         <div class="form-field">
           <label for="password-confirm">Confirme a senha</label>
-          <input type="password" id="password-confirm" name="password-confirm" required autocomplete="new-password" />
+          <div class="password-field">
+            <input type="password" id="password-confirm" name="password-confirm" required autocomplete="new-password" />
+            <button type="button" class="password-toggle" id="password-confirm-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
+          </div>
         </div>
         <button type="submit">Cadastrar</button>
       </form>

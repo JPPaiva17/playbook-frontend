@@ -1,8 +1,11 @@
 import { isLoggedIn, login } from './api.js';
+import { enablePasswordHold } from './password-toggle.js';
 
 if (isLoggedIn()) {
   window.location.href = 'dashboard.html';
 }
+
+enablePasswordHold('password', 'password-toggle');
 
 const form = document.getElementById('login-form') as HTMLFormElement;
 const errorBox = document.getElementById('error-message') as HTMLElement;
