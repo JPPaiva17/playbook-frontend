@@ -1,8 +1,8 @@
 import { isLoggedIn, register } from './api.js';
-import { enablePasswordHold } from './password-toggle.js';
+import { enablePasswordHold } from './password_toggle.js';
 
 if (isLoggedIn()) {
-  window.location.href = 'dashboard.html';
+  window.location.href = 'plays_screen.html';
 }
 
 enablePasswordHold('password', 'password-toggle');
@@ -45,7 +45,7 @@ form.addEventListener('submit', async (event) => {
 
   try {
     await register({ username, email, phone, password, password_confirm: passwordConfirm });
-    window.location.href = 'dashboard.html';
+    window.location.href = 'plays_screen.html';
   } catch (err) {
     errorBox.textContent = err instanceof Error ? err.message : 'Não foi possível criar a conta.';
   } finally {

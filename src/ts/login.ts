@@ -1,8 +1,8 @@
 import { isLoggedIn, login } from './api.js';
-import { enablePasswordHold } from './password-toggle.js';
+import { enablePasswordHold } from './password_toggle.js';
 
 if (isLoggedIn()) {
-  window.location.href = 'dashboard.html';
+  window.location.href = 'plays_screen.html';
 }
 
 enablePasswordHold('password', 'password-toggle');
@@ -21,7 +21,7 @@ form.addEventListener('submit', async (event) => {
 
   try {
     await login({ email, password });
-    window.location.href = 'dashboard.html';
+    window.location.href = 'plays_screen.html';
   } catch (err) {
     errorBox.textContent = err instanceof Error ? err.message : 'Email ou senha incorretos.';
   } finally {

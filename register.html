@@ -3,58 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PlayBook — Registro</title>
+  <title>PlayBook — Criar conta</title>
   <link rel="stylesheet" href="src/css/styles.css" />
+  <link rel="stylesheet" href="src/css/auth.css" />
 </head>
-<body>
-  <div class="auth-container">
-    <div class="auth-card">
-      <h1>Criar conta</h1>
-      <p class="error-message" id="error-message"></p>
-      <form id="register-form">
-        <div class="form-field">
-          <label for="username">Usuário</label>
-          <input type="text" id="username" name="username" required autocomplete="username" />
+<body class="auth-body">
+
+  <div class="glass-card">
+    <div class="auth-logo">📖</div>
+    <h1>Criar conta</h1>
+    <p class="auth-subtitle">Comece a organizar suas estratégias agora.</p>
+
+    <p class="glass-error" id="error-message"></p>
+
+    <form id="register-form">
+      <div class="glass-field">
+        <label for="username">Usuário</label>
+        <input class="glass-input" type="text" id="username" name="username" required autocomplete="username" placeholder="seuusuario" />
+      </div>
+
+      <div class="glass-field">
+        <label for="email">Email</label>
+        <input class="glass-input" type="email" id="email" name="email" required autocomplete="email" placeholder="seu@email.com" />
+      </div>
+
+      <div class="glass-field">
+        <label for="phone">Celular</label>
+        <input
+          class="glass-input"
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          autocomplete="tel"
+          placeholder="21987654321"
+          pattern="\d{10,11}"
+          title="Somente dígitos, com DDD (ex: 21987654321)"
+        />
+      </div>
+
+      <div class="glass-field">
+        <label for="password">Senha</label>
+        <div class="password-field">
+          <input class="glass-input" type="password" id="password" name="password" required autocomplete="new-password" placeholder="••••••••" />
+          <button type="button" class="password-toggle" id="password-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
         </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email" />
+        <small class="glass-hint">Mín. 8 caracteres, 1 maiúscula, 1 minúscula e 1 caractere especial.</small>
+      </div>
+
+      <div class="glass-field">
+        <label for="password-confirm">Confirmar senha</label>
+        <div class="password-field">
+          <input class="glass-input" type="password" id="password-confirm" name="password-confirm" required autocomplete="new-password" placeholder="••••••••" />
+          <button type="button" class="password-toggle" id="password-confirm-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
         </div>
-        <div class="form-field">
-          <label for="phone">Celular (DDD + número)</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            required
-            autocomplete="tel"
-            placeholder="21987654321"
-            pattern="\d{10,11}"
-            title="Somente dígitos, com DDD (ex: 21987654321)"
-          />
-        </div>
-        <div class="form-field">
-          <label for="password">Senha</label>
-          <div class="password-field">
-            <input type="password" id="password" name="password" required autocomplete="new-password" />
-            <button type="button" class="password-toggle" id="password-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
-          </div>
-          <small class="field-hint">Mín. 8 caracteres, 1 maiúscula, 1 minúscula e 1 caractere especial.</small>
-        </div>
-        <div class="form-field">
-          <label for="password-confirm">Confirme a senha</label>
-          <div class="password-field">
-            <input type="password" id="password-confirm" name="password-confirm" required autocomplete="new-password" />
-            <button type="button" class="password-toggle" id="password-confirm-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
-          </div>
-        </div>
-        <button type="submit">Cadastrar</button>
-      </form>
-      <p class="auth-switch">
-        Já tem conta? <a href="login.html">Entrar</a>
-      </p>
-    </div>
+      </div>
+
+      <button type="submit" class="glass-submit">Criar conta</button>
+    </form>
+
+    <p class="glass-switch">
+      Já tem conta? <a href="login.html">Entrar</a>
+    </p>
   </div>
+
   <script type="module" src="dist/js/register.js"></script>
 </body>
 </html>

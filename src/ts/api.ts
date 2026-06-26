@@ -117,16 +117,48 @@ function isLoggedIn(): boolean {
   return getAccessToken() !== null;
 }
 
+async function refreshAccessToken(): Promise<boolean> {
+  const refresh = localStorage.getItem('refresh_token');
+  if (!refresh) return false;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/token/refresh/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh }),
+    });
+
+    if (!response.ok) return false;
+
+    const data = await response.json() as { access: string };
+    localStorage.setItem('access_token', data.access);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
   const headers = new Headers(options.headers);
   headers.set('Content-Type', 'application/json');
 
   const token = getAccessToken();
-  if (token) {
-    headers.set('Authorization', `Bearer ${token}`);
+  if (token) headers.set('Authorization', `Bearer ${token}`);
+
+  let response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+
+  if (response.status === 401) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) {
+      headers.set('Authorization', `Bearer ${getAccessToken()!}`);
+      response = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+    } else {
+      clearTokens();
+      window.location.href = 'login.html';
+    }
   }
 
-  return fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+  return response;
 }
 
 async function parseErrorMessage(response: Response): Promise<string> {

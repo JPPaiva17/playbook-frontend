@@ -49,7 +49,7 @@ async function init(): Promise<void> {
       ${
         isAuthor
           ? `<div class="actions">
-               <a href="playbook-form.html?id=${playbook.id}">Editar</a>
+               <a href="playbook_form.html?id=${playbook.id}">Editar</a>
                <button type="button" id="delete-button">Excluir</button>
              </div>`
           : ''
@@ -62,7 +62,7 @@ async function init(): Promise<void> {
         if (!confirm('Tem certeza que deseja excluir este playbook?')) return;
         try {
           await deletePlaybook(playbook.id);
-          window.location.href = 'dashboard.html';
+          window.location.href = 'plays_screen.html';
         } catch (err) {
           errorBox.textContent = err instanceof Error ? err.message : 'Não foi possível excluir.';
         }

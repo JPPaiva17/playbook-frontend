@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayBook — Minhas Plays</title>
+  <link rel="stylesheet" href="src/css/styles.css" />
+  <link rel="stylesheet" href="src/css/dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <header class="appbar">
+    <div class="appbar__inner">
+      <a href="plays_screen.html" class="appbar__logo">
+        <i data-lucide="book-open"></i>
+        <span>Play<strong>Book</strong></span>
+      </a>
+
+      <nav class="appbar__nav">
+        <a href="plays_list.html" class="nav-link">
+          <i data-lucide="compass"></i>
+          <span class="nav-label">Explorar</span>
+        </a>
+        <a href="plays_screen.html" class="nav-link active">
+          <i data-lucide="crosshair"></i>
+          <span class="nav-label">Minhas Plays</span>
+        </a>
+        <a href="playbooks_screen.html" class="nav-link">
+          <i data-lucide="layers"></i>
+          <span class="nav-label">Meus Playbooks</span>
+        </a>
+      </nav>
+
+      <div class="appbar__actions">
+        <button class="btn-create" id="open-create-modal">
+          <i data-lucide="plus"></i>
+          <span>Criar Play</span>
+        </button>
+
+        <div class="avatar-wrapper">
+          <button class="avatar-btn" id="avatar-btn" aria-expanded="false" aria-haspopup="true">
+            <div class="avatar-circle" id="avatar-initials">?</div>
+            <span id="avatar-name"></span>
+            <span class="avatar-chevron"><i data-lucide="chevron-down"></i></span>
+          </button>
+          <div class="avatar-dropdown" id="avatar-dropdown">
+            <div class="dropdown-header">
+              <div class="drop-name" id="drop-name">—</div>
+              <div class="drop-email" id="drop-email">—</div>
+            </div>
+            <a href="profile.html" class="dropdown-item">
+              <i data-lucide="user"></i> Meu perfil
+            </a>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item danger" id="logout-button">
+              <i data-lucide="log-out"></i> Sair
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <p class="dash-error" id="error-message"></p>
+
+    <!-- Cabeçalho da página -->
+    <div class="page-header">
+      <div class="page-header__title">
+        <h1>Plays <span class="section-count" id="count-plays">0</span></h1>
+      </div>
+      <div class="page-header__controls">
+        <div class="search-bar">
+          <i data-lucide="search"></i>
+          <input type="text" id="search-input" placeholder="Buscar por título..." autocomplete="off" />
+        </div>
+
+        <div class="filter-wrapper">
+          <button class="filter-btn" id="filter-btn">
+            <i data-lucide="sliders-horizontal"></i>
+            Filtrar
+          </button>
+          <div class="filter-dropdown" id="filter-dropdown">
+            <div class="filter-section">
+              <label class="filter-label">Mapa</label>
+              <select class="modal__input" id="filter-map">
+                <option value="">Todos os mapas</option>
+              </select>
+            </div>
+            <div class="filter-section">
+              <label class="filter-label">Granadas</label>
+              <div class="filter-grenades">
+                <label class="filter-check">
+                  <input type="checkbox" id="f-smokes" />
+                  <span class="grenade-icon grenade-icon--smoke"><i data-lucide="wind"></i></span>
+                  Smoke
+                </label>
+                <label class="filter-check">
+                  <input type="checkbox" id="f-flash" />
+                  <span class="grenade-icon grenade-icon--flash"><i data-lucide="zap"></i></span>
+                  Flashbang
+                </label>
+                <label class="filter-check">
+                  <input type="checkbox" id="f-he" />
+                  <span class="grenade-icon grenade-icon--he"><i data-lucide="bomb"></i></span>
+                  HE
+                </label>
+                <label class="filter-check">
+                  <input type="checkbox" id="f-molotov" />
+                  <span class="grenade-icon grenade-icon--molotov"><i data-lucide="flame"></i></span>
+                  Molotov
+                </label>
+              </div>
+            </div>
+            <div class="filter-footer">
+              <button type="button" class="modal__btn-cancel" id="filter-clear" style="padding:0.4rem 0.8rem;font-size:0.8rem;">Limpar</button>
+              <button type="button" class="modal__btn-submit" id="filter-apply" style="padding:0.4rem 0.8rem;font-size:0.8rem;">Aplicar</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-create" id="open-create-modal-2">
+          <i data-lucide="plus"></i>
+          <span>Nova Play</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="plays-list" class="item-grid"></div>
+  </main>
+
+  <!-- Modal: criar / editar play -->
+  <div class="modal-overlay" id="play-modal" aria-hidden="true">
+    <div class="modal modal--play" role="dialog" aria-labelledby="modal-title">
+
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-title">Nova Play</h2>
+        <button class="modal__close" id="modal-close" aria-label="Fechar">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <p class="modal__error" id="modal-error"></p>
+
+      <form id="play-form">
+        <!-- Título (full width) -->
+        <div class="modal__field" style="margin-bottom:1rem;">
+          <label for="title">Título</label>
+          <input class="modal__input" type="text" id="title" required maxlength="255" placeholder="Ex: Execute A — 3 Smokes" />
+        </div>
+
+        <!-- Corpo: esquerda (thumbnail) + direita (abas) -->
+        <div class="play-modal__body">
+
+          <!-- Coluna esquerda -->
+          <div class="play-modal__left">
+            <div class="play-thumb" id="play-thumb">
+              <div class="play-thumb__placeholder">
+                <i data-lucide="youtube"></i>
+                <span>Thumbnail do vídeo</span>
+              </div>
+            </div>
+            <div class="modal__field" style="margin-top:0.6rem;">
+              <label for="video_url">Link do vídeo</label>
+              <input class="modal__input" type="url" id="video_url" placeholder="https://youtube.com/watch?v=..." />
+            </div>
+          </div>
+
+          <!-- Coluna direita: abas -->
+          <div class="play-modal__right">
+            <div class="modal__tabs">
+              <button type="button" class="modal__tab active" data-tab="desc">Descrição</button>
+              <button type="button" class="modal__tab" data-tab="settings">Settings</button>
+            </div>
+
+            <!-- Aba: Descrição -->
+            <div class="modal__tab-panel" id="tab-desc">
+              <div class="modal__field">
+                <label for="description">Descrição</label>
+                <textarea class="modal__input" id="description" rows="3" placeholder="Objetivo da play, contexto..."></textarea>
+              </div>
+              <div class="modal__field">
+                <label for="content">Passo a passo</label>
+                <textarea class="modal__input" id="content" rows="4" placeholder="1. Player A vai para..."></textarea>
+              </div>
+            </div>
+
+            <!-- Aba: Settings -->
+            <div class="modal__tab-panel hidden" id="tab-settings">
+              <div class="modal__row">
+                <div class="modal__field">
+                  <label for="map">Mapa</label>
+                  <select class="modal__input" id="map">
+                    <option value="">Selecione</option>
+                  </select>
+                </div>
+                <div class="modal__field">
+                  <label for="visibility">Visibilidade</label>
+                  <select class="modal__input" id="visibility">
+                    <option value="public">Pública</option>
+                    <option value="private">Privada</option>
+                  </select>
+                </div>
+                <div class="modal__field" style="max-width:90px;">
+                  <label for="players_required">Players</label>
+                  <input class="modal__input" type="number" id="players_required" min="1" max="5" value="5" />
+                </div>
+              </div>
+
+              <fieldset class="modal__fieldset">
+                <legend>Granadas</legend>
+                <div class="grenade-list">
+                  <div class="grenade-row">
+                    <span class="grenade-icon grenade-icon--smoke"><i data-lucide="wind"></i></span>
+                    <span class="grenade-row__name">Smoke</span>
+                    <input class="modal__input grenade-row__input" type="number" id="smokes" min="0" value="0" />
+                  </div>
+                  <div class="grenade-row">
+                    <span class="grenade-icon grenade-icon--flash"><i data-lucide="zap"></i></span>
+                    <span class="grenade-row__name">Flashbang</span>
+                    <input class="modal__input grenade-row__input" type="number" id="flashbangs" min="0" value="0" />
+                  </div>
+                  <div class="grenade-row">
+                    <span class="grenade-icon grenade-icon--he"><i data-lucide="bomb"></i></span>
+                    <span class="grenade-row__name">HE Grenade</span>
+                    <input class="modal__input grenade-row__input" type="number" id="he_grenades" min="0" value="0" />
+                  </div>
+                  <div class="grenade-row">
+                    <span class="grenade-icon grenade-icon--molotov"><i data-lucide="flame"></i></span>
+                    <span class="grenade-row__name">Molotov</span>
+                    <input class="modal__input grenade-row__input" type="number" id="molotovs" min="0" value="0" />
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal__footer">
+          <button type="button" class="modal__btn-cancel" id="modal-cancel">Cancelar</button>
+          <button type="submit" class="modal__btn-submit" id="submit-button">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+  <script type="module" src="dist/js/plays_screen.js"></script>
+</body>
+</html>

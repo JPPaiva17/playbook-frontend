@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayBook — Meus Playbooks</title>
+  <link rel="stylesheet" href="src/css/styles.css" />
+  <link rel="stylesheet" href="src/css/dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <header class="appbar">
+    <div class="appbar__inner">
+      <a href="plays_screen.html" class="appbar__logo">
+        <i data-lucide="book-open"></i>
+        <span>Play<strong>Book</strong></span>
+      </a>
+
+      <nav class="appbar__nav">
+        <a href="plays_list.html" class="nav-link">
+          <i data-lucide="compass"></i>
+          <span class="nav-label">Explorar</span>
+        </a>
+        <a href="plays_screen.html" class="nav-link">
+          <i data-lucide="crosshair"></i>
+          <span class="nav-label">Minhas Plays</span>
+        </a>
+        <a href="playbooks_screen.html" class="nav-link active">
+          <i data-lucide="layers"></i>
+          <span class="nav-label">Meus Playbooks</span>
+        </a>
+      </nav>
+
+      <div class="appbar__actions">
+        <button class="btn-create" id="open-create-modal">
+          <i data-lucide="plus"></i>
+          <span>Criar Playbook</span>
+        </button>
+
+        <div class="avatar-wrapper">
+          <button class="avatar-btn" id="avatar-btn" aria-expanded="false" aria-haspopup="true">
+            <div class="avatar-circle" id="avatar-initials">?</div>
+            <span id="avatar-name"></span>
+            <span class="avatar-chevron"><i data-lucide="chevron-down"></i></span>
+          </button>
+          <div class="avatar-dropdown" id="avatar-dropdown">
+            <div class="dropdown-header">
+              <div class="drop-name" id="drop-name">—</div>
+              <div class="drop-email" id="drop-email">—</div>
+            </div>
+            <a href="profile.html" class="dropdown-item">
+              <i data-lucide="user"></i> Meu perfil
+            </a>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item danger" id="logout-button">
+              <i data-lucide="log-out"></i> Sair
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <p class="dash-error" id="error-message"></p>
+
+    <div class="dash-welcome">
+      <h1 id="welcome-text">Olá!</h1>
+      <p>Gerencie suas coleções de estratégias.</p>
+    </div>
+
+    <div class="dash-stats">
+      <div class="stat-chip">
+        <i data-lucide="layers"></i>
+        <strong id="stat-playbooks">—</strong> playbooks
+      </div>
+    </div>
+
+    <section class="dash-section">
+      <div class="dash-section__header">
+        <h2>
+          <i data-lucide="layers"></i>
+          Meus Playbooks
+          <span class="section-count" id="count-playbooks">0</span>
+        </h2>
+        <button class="dash-link" id="open-create-modal-2" style="background:none;border:none;cursor:pointer;font-size:inherit;">
+          <i data-lucide="plus"></i> Novo playbook
+        </button>
+      </div>
+      <div id="playbooks-list" class="item-grid"></div>
+    </section>
+  </main>
+
+  <!-- Modal: criar / editar playbook -->
+  <div class="modal-overlay" id="playbook-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="modal-title">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-title">Novo Playbook</h2>
+        <button class="modal__close" id="modal-close" aria-label="Fechar">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <p class="modal__error" id="modal-error"></p>
+
+      <form id="playbook-form" class="modal__form">
+        <div class="modal__row">
+          <div class="modal__field">
+            <label for="pb-title">Nome</label>
+            <input class="modal__input" type="text" id="pb-title" required maxlength="255" placeholder="Ex: Rotação A — Campeonato" />
+          </div>
+          <div class="modal__field" style="max-width:160px;">
+            <label for="pb-visibility">Visibilidade</label>
+            <select class="modal__input" id="pb-visibility">
+              <option value="public">Público</option>
+              <option value="private">Privado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal__field">
+          <label for="pb-description">Descrição</label>
+          <textarea class="modal__input" id="pb-description" rows="2" placeholder="Contexto ou objetivo do playbook..."></textarea>
+        </div>
+
+        <div class="modal__field">
+          <label>Plays <span class="modal__plays-count" id="plays-count"></span></label>
+          <input class="modal__input" type="text" id="plays-search" placeholder="Buscar play..." autocomplete="off" style="margin-bottom:0.5rem;" />
+          <div class="plays-checklist" id="plays-checklist">
+            <div class="plays-checklist__loading">Carregando plays...</div>
+          </div>
+        </div>
+
+        <div class="modal__footer">
+          <button type="button" class="modal__btn-cancel" id="modal-cancel">Cancelar</button>
+          <button type="submit" class="modal__btn-submit" id="submit-button">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+  <script type="module" src="dist/js/playbooks_screen.js"></script>
+</body>
+</html>

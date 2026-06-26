@@ -5,31 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PlayBook — Login</title>
   <link rel="stylesheet" href="src/css/styles.css" />
+  <link rel="stylesheet" href="src/css/auth.css" />
 </head>
-<body>
-  <div class="auth-container">
-    <div class="auth-card">
-      <h1>PlayBook</h1>
-      <p class="error-message" id="error-message"></p>
-      <form id="login-form">
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email" />
+<body class="auth-body">
+
+  <div class="glass-card">
+    <div class="auth-logo">📖</div>
+    <h1>Bem-vindo de volta</h1>
+    <p class="auth-subtitle">Entre com seus dados para acessar.</p>
+
+    <p class="glass-error" id="error-message"></p>
+
+    <form id="login-form">
+      <div class="glass-field">
+        <label for="email">Email</label>
+        <input class="glass-input" type="email" id="email" name="email" required autocomplete="email" placeholder="seu@email.com" />
+      </div>
+
+      <div class="glass-field">
+        <label for="password">Senha</label>
+        <div class="password-field">
+          <input class="glass-input" type="password" id="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+          <button type="button" class="password-toggle" id="password-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
         </div>
-        <div class="form-field">
-          <label for="password">Senha</label>
-          <div class="password-field">
-            <input type="password" id="password" name="password" required autocomplete="current-password" />
-            <button type="button" class="password-toggle" id="password-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
-          </div>
-        </div>
-        <button type="submit">Entrar</button>
-      </form>
-      <p class="auth-switch">
-        Não tem conta? <a href="register.html">Cadastre-se</a>
-      </p>
-    </div>
+      </div>
+
+      <button type="submit" class="glass-submit">Entrar</button>
+    </form>
+
+    <p class="glass-switch">
+      Não tem conta? <a href="register.html">Criar conta</a>
+    </p>
   </div>
+
   <script type="module" src="dist/js/login.js"></script>
 </body>
 </html>
