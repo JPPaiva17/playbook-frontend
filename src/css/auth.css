@@ -153,6 +153,31 @@
   text-align: center;
 }
 
+.glass-success {
+  color: #3fb950;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.glass-success:empty {
+  display: none;
+}
+
+.glass-forgot {
+  margin-top: 0.5rem;
+  text-align: right;
+  font-size: 0.78rem;
+}
+
+.glass-forgot a {
+  color: #8b949e;
+}
+
+.glass-forgot a:hover {
+  color: #79c0ff;
+}
+
 .glass-submit {
   width: 100%;
   padding: 0.85rem;

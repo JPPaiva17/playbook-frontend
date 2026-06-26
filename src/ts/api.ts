@@ -20,6 +20,13 @@ interface PasswordChangePayload {
   new_password_confirm: string;
 }
 
+interface PasswordResetConfirmPayload {
+  uid: string;
+  token: string;
+  new_password: string;
+  new_password_confirm: string;
+}
+
 interface AuthTokens {
   access: string;
   refresh: string;
@@ -360,6 +367,26 @@ async function changePassword(payload: PasswordChangePayload): Promise<void> {
   }
 }
 
+async function requestPasswordReset(email: string): Promise<void> {
+  const response = await apiFetch('/auth/password/reset/', {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+}
+
+async function confirmPasswordReset(payload: PasswordResetConfirmPayload): Promise<void> {
+  const response = await apiFetch('/auth/password/reset/confirm/', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+}
+
 export {
   API_BASE_URL,
   apiFetch,
@@ -385,6 +412,8 @@ export {
   getMe,
   updateMe,
   changePassword,
+  requestPasswordReset,
+  confirmPasswordReset,
   saveTokens,
   clearTokens,
   PLAY_MAPS,
@@ -398,4 +427,5 @@ export type {
   PlaybookPayload,
   ProfileUpdatePayload,
   PasswordChangePayload,
+  PasswordResetConfirmPayload,
 };
