@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayBook — Playbook</title>
+  <link rel="stylesheet" href="src/css/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <span class="navbar-title">PlayBook</span>
+    <a href="dashboard.html">Voltar ao dashboard</a>
+  </header>
+
+  <main class="page">
+    <h1 id="page-title">Novo Playbook</h1>
+    <p class="error-message" id="error-message"></p>
+    <form id="playbook-form" class="wide-form">
+      <div class="form-field">
+        <label for="title">Título</label>
+        <input type="text" id="title" name="title" required maxlength="255" />
+      </div>
+
+      <div class="form-field">
+        <label for="description">Descrição</label>
+        <textarea id="description" name="description" rows="3"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="visibility">Visibilidade</label>
+        <select id="visibility" name="visibility">
+          <option value="public">Público</option>
+          <option value="private">Privado</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Plays deste playbook</label>
+        <ul id="plays-checklist" class="card-list checklist"></ul>
+      </div>
+
+      <button type="submit" id="submit-button">Salvar</button>
+    </form>
+  </main>
+
+  <script type="module" src="dist/js/playbook-form.js"></script>
+</body>
+</html>

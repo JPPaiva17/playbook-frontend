@@ -202,3 +202,138 @@ button[type='submit']:disabled {
   color: #888888;
   font-style: italic;
 }
+
+.card-block {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.card .actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-block .actions {
+  margin-left: 0;
+}
+
+.card .actions button {
+  background: transparent;
+  border: 1px solid #4a4a4a;
+  color: #ff6b6b;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.card .actions a {
+  font-size: 0.85rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.button-link {
+  background-color: #2f7de1;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.button-link:hover {
+  background-color: #2566c2;
+}
+
+.page {
+  padding: 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  margin-bottom: 1rem;
+}
+
+.wide-form .form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.wide-form .form-row .form-field {
+  flex: 1;
+}
+
+.wide-form textarea {
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #4a4a4a;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.wide-form select {
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #4a4a4a;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.grenade-fieldset {
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.grenade-fieldset legend {
+  padding: 0 0.5rem;
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.checklist {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.filter-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.filter-form input,
+.filter-form select {
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #4a4a4a;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.filter-form button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #2f7de1;
+  color: #ffffff;
+  cursor: pointer;
+}
