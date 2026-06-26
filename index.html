@@ -3,11 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PlayBook</title>
+  <title>PlayBook — Estratégias de CS2</title>
   <link rel="stylesheet" href="src/css/styles.css" />
+  <link rel="stylesheet" href="src/css/home.css" />
 </head>
-<body>
-  <h1>PlayBook</h1>
-  <p><a href="login.html">Login</a> | <a href="register.html">Registro</a></p>
+<body class="home-body">
+
+  <!-- Navbar -->
+  <nav class="home-nav">
+    <div class="home-nav__inner">
+      <a href="index.html" class="home-nav__logo">
+        <span class="logo-icon">📖</span>
+        <span>Play<strong>Book</strong></span>
+      </a>
+      <div class="home-nav__actions">
+        <a href="login.html" class="btn btn--ghost">Entrar</a>
+        <a href="register.html" class="btn btn--primary">Criar conta</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__content">
+      <div class="hero__badge">CS2 Strategy Platform</div>
+      <h1 class="hero__title">
+        Organize suas<br>
+        <span class="gradient-text">estratégias de CS2</span>
+      </h1>
+      <p class="hero__sub">
+        Crie, catalogue e compartilhe plays e playbooks com seu time.
+        Chega de estratégia perdida no Discord.
+      </p>
+      <div class="hero__cta">
+        <a href="register.html" class="btn btn--primary btn--lg">Começar agora</a>
+        <a href="login.html" class="btn btn--ghost btn--lg">Já tenho conta</a>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card__header">
+            <span class="demo-map-badge">Inferno</span>
+            <span class="demo-visibility">🔒 Privado</span>
+          </div>
+          <div class="demo-card__title">Execute A — 3 Smokes</div>
+          <div class="demo-card__tags">
+            <span class="tag">execute</span>
+            <span class="tag">smoke</span>
+            <span class="tag">5v5</span>
+          </div>
+        </div>
+
+        <div class="demo-card demo-card--secondary">
+          <div class="demo-card__header">
+            <span class="demo-map-badge demo-map-badge--mirage">Mirage</span>
+            <span class="demo-visibility">🌐 Público</span>
+          </div>
+          <div class="demo-card__title">Anti-eco B — Rush Ramp</div>
+          <div class="demo-card__tags">
+            <span class="tag">anti-eco</span>
+            <span class="tag">rush</span>
+          </div>
+        </div>
+
+        <div class="demo-card demo-card--tertiary">
+          <div class="demo-card__title">📚 Playbook: Campeonato Interno</div>
+          <div class="demo-card__meta">8 plays · 3 mapas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="features__inner">
+      <h2 class="section-title">
+        Tudo que você precisa para <span class="gradient-text">ganhar rounds</span>
+      </h2>
+      <div class="features__grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Catalogue suas Plays</h3>
+          <p>Registre cada estratégia com mapa, granadas, players necessários e vídeo de referência. Nada mais se perde.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Monte Playbooks</h3>
+          <p>Agrupe plays por tema, mapa ou torneio. Crie o playbook do seu time para cada situação de jogo.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Controle a visibilidade</h3>
+          <p>Mantenha suas estratégias privadas ou compartilhe com a comunidade. Você decide o que é público.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗺️</div>
+          <h3>Todos os mapas</h3>
+          <p>Inferno, Mirage, Dust2, Ancient, Anubis e mais. Filtre e busque estratégias por mapa rapidamente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-section">
+    <div class="cta-section__inner">
+      <h2>Pronto para parar de improvisar?</h2>
+      <p>Crie sua conta gratuita e comece a organizar seu arsenal tático agora mesmo.</p>
+      <a href="register.html" class="btn btn--primary btn--lg">Criar conta grátis</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="home-footer">
+    <div class="home-footer__inner">
+      <span class="home-nav__logo" style="font-size:1rem;">
+        <span class="logo-icon">📖</span>
+        <span>Play<strong>Book</strong></span>
+      </span>
+      <span class="home-footer__copy">PUC-Rio · 2026 · João Pedro &amp; Breno</span>
+    </div>
+  </footer>
+
 </body>
 </html>
