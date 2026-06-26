@@ -139,6 +139,152 @@
     </div>
   </div>
 
+  <!-- Modal: visualizar play (a partir do playbook) -->
+  <div class="modal-overlay pb-play-view-overlay" id="pb-play-view-modal" aria-hidden="true">
+    <div class="modal modal--play" role="dialog">
+
+      <div class="modal__header">
+        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;min-width:0;">
+          <button class="modal__close" id="pb-play-back" aria-label="Voltar" title="Voltar ao playbook"
+                  style="position:static;width:auto;height:auto;border-radius:6px;padding:0.3rem 0.6rem;display:flex;gap:0.35rem;align-items:center;font-size:0.8rem;color:#8b949e;border:1px solid #30363d;background:transparent;cursor:pointer;">
+            <i data-lucide="arrow-left"></i> Voltar
+          </button>
+          <h2 class="modal__title" id="pb-play-title" style="margin:0;"></h2>
+          <span class="map-badge" id="pb-play-map-badge" style="display:none;"></span>
+          <span class="vis-badge" id="pb-play-vis-badge"></span>
+        </div>
+        <button class="modal__close" id="pb-play-close" aria-label="Fechar tudo">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="play-modal__body">
+        <div class="play-modal__left">
+          <div class="play-thumb" id="pb-play-thumb">
+            <div class="play-thumb__placeholder"><i data-lucide="youtube"></i><span>Sem vídeo</span></div>
+          </div>
+          <a id="pb-play-yt-link" href="#" target="_blank" rel="noopener noreferrer"
+             class="card-btn" style="margin-top:0.6rem;display:none;justify-content:center;gap:0.4rem;text-decoration:none;">
+            <i data-lucide="external-link"></i> Abrir no YouTube
+          </a>
+        </div>
+
+        <div class="play-modal__right">
+          <div class="modal__tabs">
+            <button type="button" class="pb-play-tab modal__tab active" data-ptab="desc">Descrição</button>
+            <button type="button" class="pb-play-tab modal__tab" data-ptab="settings">Settings</button>
+          </div>
+
+          <div class="modal__tab-panel" id="pb-ptab-desc">
+            <div class="modal__field">
+              <label>Descrição</label>
+              <p class="view-text" id="pb-play-description"></p>
+            </div>
+            <div class="modal__field">
+              <label>Passo a passo</label>
+              <p class="view-text" id="pb-play-content"></p>
+            </div>
+          </div>
+
+          <div class="modal__tab-panel hidden" id="pb-ptab-settings">
+            <div class="modal__row">
+              <div class="modal__field">
+                <label>Mapa</label>
+                <p class="view-text" id="pb-play-map-text"></p>
+              </div>
+              <div class="modal__field">
+                <label>Visibilidade</label>
+                <p class="view-text" id="pb-play-vis-text"></p>
+              </div>
+              <div class="modal__field" style="max-width:90px;">
+                <label>Players</label>
+                <p class="view-text" id="pb-play-players"></p>
+              </div>
+            </div>
+            <fieldset class="modal__fieldset">
+              <legend>Granadas</legend>
+              <div class="grenade-list">
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--smoke"><i data-lucide="wind"></i></span>
+                  <span class="grenade-row__name">Smoke</span>
+                  <span class="view-grenade-val" id="pb-play-smokes">0</span>
+                </div>
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--flash"><i data-lucide="zap"></i></span>
+                  <span class="grenade-row__name">Flashbang</span>
+                  <span class="view-grenade-val" id="pb-play-flashbangs">0</span>
+                </div>
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--he"><i data-lucide="bomb"></i></span>
+                  <span class="grenade-row__name">HE Grenade</span>
+                  <span class="view-grenade-val" id="pb-play-he">0</span>
+                </div>
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--molotov"><i data-lucide="flame"></i></span>
+                  <span class="grenade-row__name">Molotov</span>
+                  <span class="view-grenade-val" id="pb-play-molotovs">0</span>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button type="button" class="modal__btn-cancel" id="pb-play-back-footer">
+          <i data-lucide="arrow-left"></i> Voltar ao playbook
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: visualizar playbook (estilo playlist) -->
+  <div class="modal-overlay" id="pb-view-modal" aria-hidden="true">
+    <div class="modal pb-view-modal" role="dialog" aria-label="Visualizar Playbook">
+
+      <button class="modal__close pb-view-close" id="pb-view-close" aria-label="Fechar">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="pb-view-layout">
+
+        <!-- Sidebar esquerda -->
+        <aside class="pb-view-sidebar">
+          <div class="pb-cover" id="pb-cover">
+            <div class="pb-cover__placeholder"><i data-lucide="layers"></i></div>
+          </div>
+
+          <div class="pb-view-meta">
+            <p class="pb-view-type">PLAYBOOK</p>
+            <h2 class="pb-view-title" id="pb-view-title">—</h2>
+            <p class="pb-view-desc" id="pb-view-desc"></p>
+            <div class="pb-view-stats">
+              <span class="vis-badge" id="pb-view-vis"></span>
+              <span class="pb-view-count" id="pb-view-count"></span>
+            </div>
+            <p class="pb-view-author"><i data-lucide="user"></i> <span id="pb-view-author">—</span></p>
+          </div>
+
+          <div class="pb-view-actions" id="pb-view-actions"></div>
+        </aside>
+
+        <!-- Tracklist direita -->
+        <div class="pb-track-list-wrap">
+          <div class="pb-track-header">
+            <span class="pb-track-header__num">#</span>
+            <span class="pb-track-header__info">PLAY</span>
+            <span class="pb-track-header__map">MAPA</span>
+            <span class="pb-track-header__players"><i data-lucide="users"></i></span>
+          </div>
+          <div class="pb-track-list" id="pb-track-list">
+            <div class="plays-checklist__loading">Carregando plays...</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>lucide.createIcons();</script>
   <script type="module" src="dist/js/playbooks_screen.js"></script>

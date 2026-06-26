@@ -84,8 +84,10 @@
   letter-spacing: -0.02em;
 }
 
-.logo-icon {
-  font-size: 1.3rem;
+.home-nav__logo svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .home-nav__actions {
@@ -202,8 +204,16 @@
 }
 
 .demo-visibility {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   font-size: 0.72rem;
   color: #8b949e;
+}
+
+.demo-visibility svg {
+  width: 11px;
+  height: 11px;
 }
 
 .demo-card__title {
@@ -211,6 +221,16 @@
   font-weight: 600;
   color: #e6edf3;
   margin-bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.demo-card__title svg {
+  width: 14px;
+  height: 14px;
+  color: #56d364;
+  flex-shrink: 0;
 }
 
 .demo-card__meta {
@@ -271,8 +291,21 @@
 }
 
 .feature-icon {
-  font-size: 1.75rem;
-  margin-bottom: 0.85rem;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(56, 139, 253, 0.1);
+  border: 1px solid rgba(56, 139, 253, 0.2);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.feature-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #388bfd;
 }
 
 .feature-card h3 {

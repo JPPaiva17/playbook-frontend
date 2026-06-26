@@ -244,6 +244,108 @@
     </div>
   </div>
 
+  <!-- Modal: visualizar play (read-only) -->
+  <div class="modal-overlay" id="view-modal" aria-hidden="true">
+    <div class="modal modal--play" role="dialog" aria-labelledby="view-modal-title">
+
+      <div class="modal__header">
+        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;min-width:0;">
+          <h2 class="modal__title" id="view-modal-title" style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></h2>
+          <span class="map-badge" id="view-map-badge" style="display:none;"></span>
+          <span class="vis-badge" id="view-vis-badge"></span>
+        </div>
+        <button class="modal__close" id="view-modal-close" aria-label="Fechar">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="play-modal__body">
+
+        <!-- Coluna esquerda: vídeo -->
+        <div class="play-modal__left">
+          <div class="play-thumb" id="view-thumb">
+            <div class="play-thumb__placeholder">
+              <i data-lucide="youtube"></i>
+              <span>Sem vídeo</span>
+            </div>
+          </div>
+          <a id="view-yt-link" href="#" target="_blank" rel="noopener noreferrer"
+             class="card-btn" style="margin-top:0.6rem;display:none;justify-content:center;gap:0.4rem;text-decoration:none;">
+            <i data-lucide="external-link"></i> Abrir no YouTube
+          </a>
+        </div>
+
+        <!-- Coluna direita: abas -->
+        <div class="play-modal__right">
+          <div class="modal__tabs">
+            <button type="button" class="view-tab modal__tab active" data-vtab="desc">Descrição</button>
+            <button type="button" class="view-tab modal__tab" data-vtab="settings">Settings</button>
+          </div>
+
+          <!-- Aba: Descrição -->
+          <div class="modal__tab-panel" id="vtab-desc">
+            <div class="modal__field">
+              <label>Descrição</label>
+              <p class="view-text" id="view-description"></p>
+            </div>
+            <div class="modal__field">
+              <label>Passo a passo</label>
+              <p class="view-text" id="view-content"></p>
+            </div>
+          </div>
+
+          <!-- Aba: Settings -->
+          <div class="modal__tab-panel hidden" id="vtab-settings">
+            <div class="modal__row">
+              <div class="modal__field">
+                <label>Mapa</label>
+                <p class="view-text" id="view-map-text"></p>
+              </div>
+              <div class="modal__field">
+                <label>Visibilidade</label>
+                <p class="view-text" id="view-visibility-text"></p>
+              </div>
+              <div class="modal__field" style="max-width:90px;">
+                <label>Players</label>
+                <p class="view-text" id="view-players"></p>
+              </div>
+            </div>
+
+            <fieldset class="modal__fieldset">
+              <legend>Granadas</legend>
+              <div class="grenade-list">
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--smoke"><i data-lucide="wind"></i></span>
+                  <span class="grenade-row__name">Smoke</span>
+                  <span class="view-grenade-val" id="view-smokes">0</span>
+                </div>
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--flash"><i data-lucide="zap"></i></span>
+                  <span class="grenade-row__name">Flashbang</span>
+                  <span class="view-grenade-val" id="view-flashbangs">0</span>
+                </div>
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--he"><i data-lucide="bomb"></i></span>
+                  <span class="grenade-row__name">HE Grenade</span>
+                  <span class="view-grenade-val" id="view-he">0</span>
+                </div>
+                <div class="grenade-row">
+                  <span class="grenade-icon grenade-icon--molotov"><i data-lucide="flame"></i></span>
+                  <span class="grenade-row__name">Molotov</span>
+                  <span class="view-grenade-val" id="view-molotovs">0</span>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button type="button" class="modal__btn-cancel" id="view-modal-cancel">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>lucide.createIcons();</script>
   <script type="module" src="dist/js/plays_screen.js"></script>

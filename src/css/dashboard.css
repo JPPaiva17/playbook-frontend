@@ -1136,6 +1136,380 @@
   cursor: not-allowed;
 }
 
+/* ── Modal view (read-only) ── */
+.view-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #e6edf3;
+  white-space: pre-wrap;
+  line-height: 1.55;
+  min-height: 1.2rem;
+}
+
+.view-text:empty::after {
+  content: '—';
+  color: #8b949e;
+}
+
+.view-grenade-val {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e6edf3;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* iframe embed YouTube */
+.yt-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 6px;
+  display: block;
+}
+
+/* card clicável */
+.item-card {
+  cursor: pointer;
+}
+
+/* Modal da play aberto a partir do playbook (z-index acima do playbook modal) */
+.pb-play-view-overlay {
+  z-index: 600;
+}
+
+/* ── Modal Playbook — estilo playlist ── */
+.pb-view-modal {
+  max-width: 920px;
+  max-height: 88vh;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pb-view-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: rgba(13,17,23,0.7);
+  border: 1px solid #30363d;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s;
+}
+
+.pb-view-close:hover {
+  color: #e6edf3;
+  background: rgba(255,255,255,0.1);
+}
+
+.pb-view-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pb-view-layout {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.pb-view-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #1a2233 0%, #0d1117 60%);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 1.5rem;
+}
+
+/* Cover / capa */
+.pb-cover {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #161b22;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pb-cover.pb-cover--single {
+  grid-template-columns: 1fr;
+}
+
+.pb-cover__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pb-cover__placeholder {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1f2d45, #0d1117);
+}
+
+.pb-cover__placeholder svg {
+  width: 64px;
+  height: 64px;
+  color: #30363d;
+}
+
+/* Meta */
+.pb-view-meta {
+  padding: 1.25rem 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.pb-view-type {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #8b949e;
+  margin: 0;
+}
+
+.pb-view-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #e6edf3;
+  margin: 0;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.pb-view-desc {
+  font-size: 0.82rem;
+  color: #8b949e;
+  margin: 0.1rem 0 0;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.pb-view-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.pb-view-count {
+  font-size: 0.78rem;
+  color: #8b949e;
+}
+
+.pb-view-author {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: #8b949e;
+  margin: 0.1rem 0 0;
+}
+
+.pb-view-author svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.pb-view-actions {
+  padding: 0.75rem 1.25rem 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Tracklist */
+.pb-track-list-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #0d1117;
+}
+
+.pb-track-header {
+  display: grid;
+  grid-template-columns: 36px 1fr 90px 40px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-bottom: 1px solid #21262d;
+  flex-shrink: 0;
+}
+
+.pb-track-header span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8b949e;
+}
+
+.pb-track-header__num {
+  text-align: center;
+}
+
+.pb-track-header__players {
+  display: flex;
+  justify-content: center;
+}
+
+.pb-track-header__players svg {
+  width: 13px;
+  height: 13px;
+}
+
+.pb-track-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+/* Cada track */
+.pb-track {
+  display: grid;
+  grid-template-columns: 36px 1fr 90px 40px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.25rem;
+  border-radius: 6px;
+  margin: 0 0.5rem;
+  cursor: default;
+  transition: background 0.12s;
+  position: relative;
+}
+
+.pb-track:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.pb-track__num {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8b949e;
+  min-width: 20px;
+  position: relative;
+}
+
+.pb-track__yt-btn {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #e6edf3;
+  padding: 0;
+}
+
+.pb-track__yt-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pb-track:hover .pb-track__num > span { display: none; }
+.pb-track:hover .pb-track__yt-btn { display: flex; }
+
+.pb-track__thumb-wrap {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #161b22;
+}
+
+.pb-track__thumb-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pb-track__thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #30363d;
+}
+
+.pb-track__thumb-placeholder svg {
+  width: 18px;
+  height: 18px;
+}
+
+.pb-track__info {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.pb-track__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pb-track__title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #e6edf3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pb-track__author {
+  font-size: 0.73rem;
+  color: #8b949e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pb-track__map {
+  justify-self: start;
+}
+
+.pb-track__players {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #8b949e;
+}
+
+.pb-track-empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #8b949e;
+  font-size: 0.88rem;
+}
+
 /* ── Responsivo ── */
 @media (max-width: 640px) {
   .appbar__nav .nav-link .nav-label {

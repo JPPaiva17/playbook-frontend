@@ -6,6 +6,7 @@
   <title>PlayBook — Estratégias de CS2</title>
   <link rel="stylesheet" href="src/css/styles.css" />
   <link rel="stylesheet" href="src/css/home.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body class="home-body">
 
@@ -13,7 +14,7 @@
   <nav class="home-nav">
     <div class="home-nav__inner">
       <a href="index.html" class="home-nav__logo">
-        <span class="logo-icon">📖</span>
+        <i data-lucide="book-open"></i>
         <span>Play<strong>Book</strong></span>
       </a>
       <div class="home-nav__actions">
@@ -46,7 +47,7 @@
         <div class="demo-card">
           <div class="demo-card__header">
             <span class="demo-map-badge">Inferno</span>
-            <span class="demo-visibility">🔒 Privado</span>
+            <span class="demo-visibility"><i data-lucide="lock"></i> Privado</span>
           </div>
           <div class="demo-card__title">Execute A — 3 Smokes</div>
           <div class="demo-card__tags">
@@ -59,7 +60,7 @@
         <div class="demo-card demo-card--secondary">
           <div class="demo-card__header">
             <span class="demo-map-badge demo-map-badge--mirage">Mirage</span>
-            <span class="demo-visibility">🌐 Público</span>
+            <span class="demo-visibility"><i data-lucide="globe"></i> Público</span>
           </div>
           <div class="demo-card__title">Anti-eco B — Rush Ramp</div>
           <div class="demo-card__tags">
@@ -69,7 +70,7 @@
         </div>
 
         <div class="demo-card demo-card--tertiary">
-          <div class="demo-card__title">📚 Playbook: Campeonato Interno</div>
+          <div class="demo-card__title"><i data-lucide="layers"></i> Playbook: Campeonato Interno</div>
           <div class="demo-card__meta">8 plays · 3 mapas</div>
         </div>
       </div>
@@ -84,22 +85,22 @@
       </h2>
       <div class="features__grid">
         <div class="feature-card">
-          <div class="feature-icon">🎯</div>
+          <div class="feature-icon"><i data-lucide="crosshair"></i></div>
           <h3>Catalogue suas Plays</h3>
           <p>Registre cada estratégia com mapa, granadas, players necessários e vídeo de referência. Nada mais se perde.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">📚</div>
+          <div class="feature-icon"><i data-lucide="layers"></i></div>
           <h3>Monte Playbooks</h3>
           <p>Agrupe plays por tema, mapa ou torneio. Crie o playbook do seu time para cada situação de jogo.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🔐</div>
+          <div class="feature-icon"><i data-lucide="lock"></i></div>
           <h3>Controle a visibilidade</h3>
           <p>Mantenha suas estratégias privadas ou compartilhe com a comunidade. Você decide o que é público.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🗺️</div>
+          <div class="feature-icon"><i data-lucide="map"></i></div>
           <h3>Todos os mapas</h3>
           <p>Inferno, Mirage, Dust2, Ancient, Anubis e mais. Filtre e busque estratégias por mapa rapidamente.</p>
         </div>
@@ -120,12 +121,13 @@
   <footer class="home-footer">
     <div class="home-footer__inner">
       <span class="home-nav__logo" style="font-size:1rem;">
-        <span class="logo-icon">📖</span>
+        <i data-lucide="book-open"></i>
         <span>Play<strong>Book</strong></span>
       </span>
       <span class="home-footer__copy">PUC-Rio · 2026 · João Pedro &amp; Breno</span>
     </div>
   </footer>
 
+  <script>lucide.createIcons();</script>
 </body>
 </html>

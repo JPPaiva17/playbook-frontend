@@ -221,6 +221,110 @@ modalCancel.addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
+// ── Modal de visualização (read-only) ──
+const viewModal       = document.getElementById('view-modal')        as HTMLElement;
+const viewModalClose  = document.getElementById('view-modal-close')  as HTMLButtonElement;
+const viewModalCancel = document.getElementById('view-modal-cancel') as HTMLButtonElement;
+const viewTitle       = document.getElementById('view-modal-title')  as HTMLElement;
+const viewMapBadge    = document.getElementById('view-map-badge')    as HTMLElement;
+const viewVisBadge    = document.getElementById('view-vis-badge')    as HTMLElement;
+const viewThumb       = document.getElementById('view-thumb')        as HTMLElement;
+const viewYtLink      = document.getElementById('view-yt-link')      as HTMLAnchorElement;
+const viewDescription = document.getElementById('view-description')  as HTMLElement;
+const viewContent     = document.getElementById('view-content')      as HTMLElement;
+const viewMapText     = document.getElementById('view-map-text')     as HTMLElement;
+const viewVisText     = document.getElementById('view-visibility-text') as HTMLElement;
+const viewPlayers     = document.getElementById('view-players')      as HTMLElement;
+const viewSmokes      = document.getElementById('view-smokes')       as HTMLElement;
+const viewFlashbangs  = document.getElementById('view-flashbangs')   as HTMLElement;
+const viewHe          = document.getElementById('view-he')           as HTMLElement;
+const viewMolotovs    = document.getElementById('view-molotovs')     as HTMLElement;
+
+document.querySelectorAll<HTMLButtonElement>('.view-tab').forEach((tab) => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.view-tab').forEach((t) => t.classList.remove('active'));
+    document.querySelectorAll<HTMLElement>('[id^="vtab-"]').forEach((p) => p.classList.add('hidden'));
+    tab.classList.add('active');
+    document.getElementById(`vtab-${tab.dataset.vtab}`)?.classList.remove('hidden');
+  });
+});
+
+function closeViewModal(): void {
+  viewModal.classList.remove('open');
+  viewModal.setAttribute('aria-hidden', 'true');
+  // Remove iframe para parar o vídeo
+  viewThumb.querySelector('iframe')?.remove();
+}
+
+viewModalClose.addEventListener('click', closeViewModal);
+viewModalCancel.addEventListener('click', closeViewModal);
+viewModal.addEventListener('click', (e) => { if (e.target === viewModal) closeViewModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeViewModal(); });
+
+async function openView(id: number): Promise<void> {
+  // Reseta aba para Descrição
+  document.querySelectorAll('.view-tab').forEach((t) => t.classList.remove('active'));
+  document.querySelectorAll<HTMLElement>('[id^="vtab-"]').forEach((p) => p.classList.add('hidden'));
+  document.querySelector<HTMLElement>('.view-tab[data-vtab="desc"]')?.classList.add('active');
+  document.getElementById('vtab-desc')?.classList.remove('hidden');
+
+  viewTitle.textContent       = 'Carregando...';
+  viewMapBadge.style.display  = 'none';
+  viewYtLink.style.display    = 'none';
+  viewThumb.innerHTML         = `<div class="play-thumb__placeholder"><i data-lucide="youtube"></i><span>Sem vídeo</span></div>`;
+  refreshIcons();
+
+  viewModal.classList.add('open');
+  viewModal.setAttribute('aria-hidden', 'false');
+
+  try {
+    const play = await getPlay(id);
+
+    viewTitle.textContent     = play.title;
+    viewDescription.textContent = play.description || '';
+    viewContent.textContent   = play.content;
+    viewPlayers.textContent   = String(play.players_required);
+    viewSmokes.textContent    = String(play.smokes);
+    viewFlashbangs.textContent = String(play.flashbangs);
+    viewHe.textContent        = String(play.he_grenades);
+    viewMolotovs.textContent  = String(play.molotovs);
+
+    // Mapa
+    const mapLabel = MAP_LABELS[play.map] ?? play.map ?? '';
+    if (mapLabel) {
+      viewMapBadge.textContent  = mapLabel;
+      viewMapBadge.style.display = '';
+      viewMapText.textContent   = mapLabel;
+    } else {
+      viewMapBadge.style.display = 'none';
+      viewMapText.textContent   = '—';
+    }
+
+    // Visibilidade
+    const isPublic = play.visibility === 'public';
+    viewVisBadge.textContent  = isPublic ? 'Pública' : 'Privada';
+    viewVisBadge.className    = `vis-badge${isPublic ? ' public' : ''}`;
+    viewVisText.textContent   = isPublic ? 'Pública' : 'Privada';
+
+    // Vídeo
+    const ytId = extractYouTubeId(play.video_url ?? '');
+    if (ytId) {
+      viewThumb.innerHTML = `<iframe class="yt-embed"
+        src="https://www.youtube.com/embed/${ytId}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>`;
+      viewYtLink.href           = play.video_url!;
+      viewYtLink.style.display  = 'flex';
+    } else {
+      viewThumb.innerHTML = `<div class="play-thumb__placeholder"><i data-lucide="youtube"></i><span>Sem vídeo</span></div>`;
+      viewYtLink.style.display  = 'none';
+      refreshIcons();
+    }
+  } catch {
+    viewTitle.textContent = 'Erro ao carregar play.';
+  }
+}
+
 // ── Abrir em modo edição ──
 async function openEdit(id: number): Promise<void> {
   resetForm();
@@ -344,6 +448,13 @@ function renderPlays(plays: Play[]): void {
   }).join('');
 
   refreshIcons();
+
+  playsList.querySelectorAll<HTMLElement>('.item-card').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('.item-card__actions')) return;
+      openView(Number(card.dataset.playId));
+    });
+  });
 
   playsList.querySelectorAll<HTMLButtonElement>('.edit-play-btn').forEach((btn) => {
     btn.addEventListener('click', () => openEdit(Number(btn.dataset.id)));
