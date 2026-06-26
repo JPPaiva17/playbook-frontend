@@ -76,7 +76,7 @@ form.addEventListener('submit', async (event) => {
     } else {
       await createPlay(payload);
     }
-    window.location.href = 'dashboard.html';
+    window.location.href = 'plays_screen.html';
   } catch (err) {
     errorBox.textContent = err instanceof Error ? err.message : 'Não foi possível salvar a play.';
   } finally {
