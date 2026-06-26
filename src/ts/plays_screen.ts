@@ -1,5 +1,5 @@
 import {
-  PLAY_MAPS, createPlay, deletePlay, getMyPlays, getPlay,
+  PLAY_MAPS, createPlay, deletePlay, getMe, getMyPlays, getPlay,
   getStoredUser, isLoggedIn, logout, updatePlay,
 } from './api.js';
 import type { Play, PlayPayload } from './api.js';
@@ -50,12 +50,18 @@ for (const m of PLAY_MAPS) {
 }
 
 // ── Dados do usuário ──
-const user = getStoredUser();
-if (user) {
-  avatarInitials.textContent = user.username.slice(0, 2).toUpperCase();
-  avatarName.textContent     = user.username;
-  dropName.textContent       = user.username;
-  dropEmail.textContent      = user.email;
+function renderUser(username: string, email: string): void {
+  avatarInitials.textContent = username.slice(0, 2).toUpperCase();
+  avatarName.textContent     = username;
+  dropName.textContent       = username;
+  dropEmail.textContent      = email;
+}
+
+const cachedUser = getStoredUser();
+if (cachedUser) {
+  renderUser(cachedUser.username, cachedUser.email);
+} else {
+  getMe().then((user) => renderUser(user.username, user.email)).catch(() => {});
 }
 
 // ── Logout ──

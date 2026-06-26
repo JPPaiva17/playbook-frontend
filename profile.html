@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayBook — Meu Perfil</title>
+  <link rel="stylesheet" href="src/css/styles.css" />
+  <link rel="stylesheet" href="src/css/dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <header class="appbar">
+    <div class="appbar__inner">
+      <a href="plays_screen.html" class="appbar__logo">
+        <i data-lucide="book-open"></i>
+        <span>Play<strong>Book</strong></span>
+      </a>
+
+      <nav class="appbar__nav">
+        <a href="plays_list.html" class="nav-link">
+          <i data-lucide="compass"></i>
+          <span class="nav-label">Explorar</span>
+        </a>
+        <a href="plays_screen.html" class="nav-link">
+          <i data-lucide="crosshair"></i>
+          <span class="nav-label">Minhas Plays</span>
+        </a>
+        <a href="playbooks_screen.html" class="nav-link">
+          <i data-lucide="layers"></i>
+          <span class="nav-label">Meus Playbooks</span>
+        </a>
+      </nav>
+
+      <div class="appbar__actions">
+        <div class="avatar-wrapper">
+          <button class="avatar-btn" id="avatar-btn" aria-expanded="false" aria-haspopup="true">
+            <div class="avatar-circle" id="avatar-initials">?</div>
+            <span id="avatar-name"></span>
+            <span class="avatar-chevron"><i data-lucide="chevron-down"></i></span>
+          </button>
+          <div class="avatar-dropdown" id="avatar-dropdown">
+            <div class="dropdown-header">
+              <div class="drop-name" id="drop-name">—</div>
+              <div class="drop-email" id="drop-email">—</div>
+            </div>
+            <a href="profile.html" class="dropdown-item active">
+              <i data-lucide="user"></i> Meu perfil
+            </a>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item danger" id="logout-button">
+              <i data-lucide="log-out"></i> Sair
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="page-header">
+      <div class="page-header__title">
+        <h1>Meu perfil</h1>
+      </div>
+    </div>
+
+    <p class="dash-error" id="error-message"></p>
+    <p class="dash-success" id="success-message"></p>
+
+    <form id="profile-form" class="modal__body" style="max-width: 480px;">
+      <div class="modal__field">
+        <label for="username">Usuário</label>
+        <input class="modal__input" type="text" id="username" name="username" required maxlength="150" />
+      </div>
+
+      <div class="modal__field">
+        <label for="email">Email</label>
+        <input class="modal__input" type="email" id="email" name="email" required />
+      </div>
+
+      <div class="modal__field">
+        <label for="phone">Celular (DDD + número)</label>
+        <input
+          class="modal__input"
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          pattern="\d{10,11}"
+          title="Somente dígitos, com DDD (ex: 21987654321)"
+        />
+      </div>
+
+      <div class="modal__footer">
+        <button type="submit" class="modal__btn-submit" id="submit-button">Salvar alterações</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+  <script type="module" src="dist/js/profile.js"></script>
+</body>
+</html>

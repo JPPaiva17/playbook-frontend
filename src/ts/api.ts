@@ -4,6 +4,14 @@ interface AuthUser {
   id: number;
   email: string;
   username: string;
+  phone?: string;
+  date_joined?: string;
+}
+
+interface ProfileUpdatePayload {
+  username: string;
+  email: string;
+  phone: string;
 }
 
 interface AuthTokens {
@@ -105,6 +113,10 @@ function getAccessToken(): string | null {
 function getStoredUser(): AuthUser | null {
   const raw = localStorage.getItem('user');
   return raw ? (JSON.parse(raw) as AuthUser) : null;
+}
+
+function storeUser(user: AuthUser): void {
+  localStorage.setItem('user', JSON.stringify(user));
 }
 
 function clearTokens(): void {
@@ -315,6 +327,26 @@ async function deletePlaybook(id: number): Promise<void> {
   }
 }
 
+async function getMe(): Promise<AuthUser> {
+  const response = await apiFetch('/auth/me/');
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  const user: AuthUser = await response.json();
+  storeUser(user);
+  return user;
+}
+
+async function updateMe(payload: ProfileUpdatePayload): Promise<AuthUser> {
+  const response = await apiFetch('/auth/me/', { method: 'PATCH', body: JSON.stringify(payload) });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+  const user: AuthUser = await response.json();
+  storeUser(user);
+  return user;
+}
+
 export {
   API_BASE_URL,
   apiFetch,
@@ -337,8 +369,10 @@ export {
   createPlaybook,
   updatePlaybook,
   deletePlaybook,
+  getMe,
+  updateMe,
   saveTokens,
   clearTokens,
   PLAY_MAPS,
 };
-export type { AuthUser, Play, Playbook, PaginatedResponse, PlayPayload, PlaybookPayload };
+export type { AuthUser, Play, Playbook, PaginatedResponse, PlayPayload, PlaybookPayload, ProfileUpdatePayload };

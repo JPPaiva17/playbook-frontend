@@ -1,5 +1,5 @@
 import {
-  createPlaybook, deletePlaybook, getMyPlaybooks, getMyPlays, getPlaybook,
+  createPlaybook, deletePlaybook, getMe, getMyPlaybooks, getMyPlays, getPlaybook,
   getPlays, getStoredUser, isLoggedIn, logout, updatePlaybook,
 } from './api.js';
 import type { Play, Playbook, PlaybookPayload } from './api.js';
@@ -35,13 +35,19 @@ const openCreate1    = document.getElementById('open-create-modal')  as HTMLButt
 const openCreate2    = document.getElementById('open-create-modal-2') as HTMLButtonElement;
 
 // ── Dados do usuário ──
-const user = getStoredUser();
-if (user) {
-  welcomeText.textContent    = `Olá, ${user.username}`;
-  avatarInitials.textContent = user.username.slice(0, 2).toUpperCase();
-  avatarName.textContent     = user.username;
-  dropName.textContent       = user.username;
-  dropEmail.textContent      = user.email;
+function renderUser(username: string, email: string): void {
+  welcomeText.textContent    = `Olá, ${username}`;
+  avatarInitials.textContent = username.slice(0, 2).toUpperCase();
+  avatarName.textContent     = username;
+  dropName.textContent       = username;
+  dropEmail.textContent      = email;
+}
+
+const cachedUser = getStoredUser();
+if (cachedUser) {
+  renderUser(cachedUser.username, cachedUser.email);
+} else {
+  getMe().then((user) => renderUser(user.username, user.email)).catch(() => {});
 }
 
 // ── Logout ──
