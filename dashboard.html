@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayBook — Dashboard</title>
+  <link rel="stylesheet" href="src/css/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <span class="navbar-title">PlayBook</span>
+    <span id="welcome-text"></span>
+    <button id="logout-button">Sair</button>
+  </header>
+
+  <main class="dashboard">
+    <section class="dashboard-section">
+      <h2>Minhas Plays</h2>
+      <ul id="plays-list" class="card-list"></ul>
+    </section>
+
+    <section class="dashboard-section">
+      <h2>Meus Playbooks</h2>
+      <ul id="playbooks-list" class="card-list"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="dist/js/dashboard.js"></script>
+</body>
+</html>
