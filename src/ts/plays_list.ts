@@ -1,21 +1,14 @@
-import {
-  PLAY_MAPS, getPlaybooks, getPlays, getStoredUser, isLoggedIn, logout,
-} from './api.js';
+import { initAppbar } from './appbar.js';
+import { PLAY_MAPS, getPlaybooks, getPlays } from './api.js';
 import type { Play, Playbook } from './api.js';
 
-if (!isLoggedIn()) window.location.href = 'login.html';
+// Injeta a appbar
+initAppbar({ active: 'explore' });
 
 // ── Elementos ──
-const errorBox      = document.getElementById('error-message')   as HTMLElement;
-const exploreGrid   = document.getElementById('explore-grid')    as HTMLElement;
-const resultCount   = document.getElementById('result-count')    as HTMLElement;
-const avatarInitials= document.getElementById('avatar-initials') as HTMLElement;
-const avatarName    = document.getElementById('avatar-name')     as HTMLElement;
-const dropName      = document.getElementById('drop-name')       as HTMLElement;
-const dropEmail     = document.getElementById('drop-email')      as HTMLElement;
-const logoutButton  = document.getElementById('logout-button')   as HTMLButtonElement;
-const avatarBtn     = document.getElementById('avatar-btn')      as HTMLButtonElement;
-const avatarDropdown= document.getElementById('avatar-dropdown') as HTMLElement;
+const errorBox    = document.getElementById('error-message') as HTMLElement;
+const exploreGrid = document.getElementById('explore-grid')  as HTMLElement;
+const resultCount = document.getElementById('result-count')  as HTMLElement;
 const searchInput   = document.getElementById('search-input')    as HTMLInputElement;
 const filterBtn     = document.getElementById('filter-btn')      as HTMLButtonElement;
 const filterDropdown= document.getElementById('filter-dropdown') as HTMLElement;
@@ -34,25 +27,6 @@ for (const m of PLAY_MAPS) {
   filterMap.appendChild(opt);
 }
 
-// ── Usuário ──
-const user = getStoredUser();
-if (user) {
-  avatarInitials.textContent = user.username.slice(0, 2).toUpperCase();
-  avatarName.textContent     = user.username;
-  dropName.textContent       = user.username;
-  dropEmail.textContent      = user.email;
-}
-
-// ── Logout ──
-logoutButton.addEventListener('click', () => { logout(); window.location.href = 'login.html'; });
-
-// ── Avatar dropdown ──
-avatarBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  const open = avatarDropdown.classList.toggle('open');
-  avatarBtn.setAttribute('aria-expanded', String(open));
-});
-
 // ── Filter dropdown ──
 filterBtn.addEventListener('click', (e) => {
   e.stopPropagation();
@@ -63,8 +37,6 @@ filterBtn.addEventListener('click', (e) => {
 filterDropdown.addEventListener('click', (e) => e.stopPropagation());
 
 document.addEventListener('click', () => {
-  avatarDropdown.classList.remove('open');
-  avatarBtn.setAttribute('aria-expanded', 'false');
   filterDropdown.classList.remove('open');
   filterBtn.classList.remove('active');
 });

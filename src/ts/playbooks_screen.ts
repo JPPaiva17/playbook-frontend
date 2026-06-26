@@ -1,24 +1,18 @@
+import { initAppbar } from './appbar.js';
 import {
-  createPlaybook, deletePlaybook, getMe, getMyPlaybooks, getMyPlays, getPlaybook,
-  getPlays, getStoredUser, isLoggedIn, logout, updatePlaybook,
+  createPlaybook, deletePlaybook, getMyPlaybooks, getMyPlays, getPlaybook,
+  getPlays, updatePlaybook,
 } from './api.js';
 import type { Play, Playbook, PlaybookPayload } from './api.js';
 
-if (!isLoggedIn()) window.location.href = 'login.html';
+// Injeta a appbar
+initAppbar({ active: 'playbooks', createBtn: { id: 'open-create-modal', label: 'Criar Playbook' } });
 
 // ── Elementos estáticos ──
 const errorBox       = document.getElementById('error-message')   as HTMLElement;
 const playbooksList  = document.getElementById('playbooks-list')  as HTMLElement;
-const welcomeText    = document.getElementById('welcome-text')    as HTMLElement;
-const avatarInitials = document.getElementById('avatar-initials') as HTMLElement;
-const avatarName     = document.getElementById('avatar-name')     as HTMLElement;
-const dropName       = document.getElementById('drop-name')       as HTMLElement;
-const dropEmail      = document.getElementById('drop-email')      as HTMLElement;
 const statPlaybooks  = document.getElementById('stat-playbooks')  as HTMLElement;
 const countPlaybooks = document.getElementById('count-playbooks') as HTMLElement;
-const logoutButton   = document.getElementById('logout-button')   as HTMLButtonElement;
-const avatarBtn      = document.getElementById('avatar-btn')      as HTMLButtonElement;
-const avatarDropdown = document.getElementById('avatar-dropdown') as HTMLElement;
 
 // ── Modal ──
 const modal          = document.getElementById('playbook-modal') as HTMLElement;
@@ -33,36 +27,6 @@ const playsSearch    = document.getElementById('plays-search')   as HTMLInputEle
 const playsCount     = document.getElementById('plays-count')    as HTMLElement;
 const openCreate1    = document.getElementById('open-create-modal')  as HTMLButtonElement;
 const openCreate2    = document.getElementById('open-create-modal-2') as HTMLButtonElement;
-
-// ── Dados do usuário ──
-function renderUser(username: string, email: string): void {
-  welcomeText.textContent    = `Olá, ${username}`;
-  avatarInitials.textContent = username.slice(0, 2).toUpperCase();
-  avatarName.textContent     = username;
-  dropName.textContent       = username;
-  dropEmail.textContent      = email;
-}
-
-const cachedUser = getStoredUser();
-if (cachedUser) {
-  renderUser(cachedUser.username, cachedUser.email);
-} else {
-  getMe().then((user) => renderUser(user.username, user.email)).catch(() => {});
-}
-
-// ── Logout ──
-logoutButton.addEventListener('click', () => { logout(); window.location.href = 'login.html'; });
-
-// ── Avatar dropdown ──
-avatarBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  const open = avatarDropdown.classList.toggle('open');
-  avatarBtn.setAttribute('aria-expanded', String(open));
-});
-document.addEventListener('click', () => {
-  avatarDropdown.classList.remove('open');
-  avatarBtn.setAttribute('aria-expanded', 'false');
-});
 
 // ── Estado do modal ──
 let editingId: number | null = null;
