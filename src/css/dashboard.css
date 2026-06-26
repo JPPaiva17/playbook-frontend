@@ -1569,3 +1569,76 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Página de perfil ── */
+.profile-main {
+  max-width: 720px;
+}
+
+.profile-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-card__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-card__avatar {
+  width: 56px;
+  height: 56px;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.profile-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-card__info h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.profile-card__info p {
+  color: #8b949e;
+  font-size: 0.85rem;
+  margin-top: 0.15rem;
+}
+
+.profile-card__meta {
+  font-size: 0.75rem !important;
+  color: #6e7681 !important;
+}
+
+.profile-card__edit-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.profile-card__divider {
+  height: 1px;
+  background: #21262d;
+  margin: 0.5rem 0 1rem;
+}
+
+.profile-card__hint {
+  color: #8b949e;
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+  margin-top: -0.5rem;
+}
+
+@media (max-width: 640px) {
+  .profile-card__top {
+    flex-wrap: wrap;
+  }
+}

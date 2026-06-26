@@ -56,44 +56,100 @@
     </div>
   </header>
 
-  <main class="dash-main">
-    <div class="page-header">
-      <div class="page-header__title">
-        <h1>Meu perfil</h1>
-      </div>
-    </div>
-
+  <main class="dash-main profile-main">
     <p class="dash-error" id="error-message"></p>
     <p class="dash-success" id="success-message"></p>
 
-    <form id="profile-form" class="modal__body" style="max-width: 480px;">
-      <div class="modal__field">
-        <label for="username">Usuário</label>
-        <input class="modal__input" type="text" id="username" name="username" required maxlength="150" />
+    <!-- ── Cartão de visualização ── -->
+    <section class="profile-card" id="profile-view">
+      <div class="profile-card__top">
+        <div class="avatar-circle profile-card__avatar" id="profile-avatar">?</div>
+        <div class="profile-card__info">
+          <h1 id="profile-username">—</h1>
+          <p id="profile-email">—</p>
+          <p class="profile-card__meta" id="profile-joined"></p>
+        </div>
+        <button type="button" class="btn-create" id="edit-toggle-button">
+          <i data-lucide="pencil"></i>
+          <span>Editar perfil</span>
+        </button>
       </div>
 
-      <div class="modal__field">
-        <label for="email">Email</label>
-        <input class="modal__input" type="email" id="email" name="email" required />
+      <div class="dash-stats">
+        <a href="plays_screen.html" class="stat-chip">
+          <i data-lucide="crosshair"></i>
+          <strong id="stat-plays">0</strong> Minhas Plays
+        </a>
+        <a href="playbooks_screen.html" class="stat-chip">
+          <i data-lucide="layers"></i>
+          <strong id="stat-playbooks">0</strong> Meus Playbooks
+        </a>
       </div>
+    </section>
 
-      <div class="modal__field">
-        <label for="phone">Celular (DDD + número)</label>
-        <input
-          class="modal__input"
-          type="tel"
-          id="phone"
-          name="phone"
-          required
-          pattern="\d{10,11}"
-          title="Somente dígitos, com DDD (ex: 21987654321)"
-        />
-      </div>
+    <!-- ── Formulário de edição (escondido até clicar em "Editar perfil") ── -->
+    <section class="profile-card" id="profile-edit" hidden>
+      <h2 class="profile-card__edit-title">Editar perfil</h2>
 
-      <div class="modal__footer">
-        <button type="submit" class="modal__btn-submit" id="submit-button">Salvar alterações</button>
-      </div>
-    </form>
+      <form id="profile-form" class="modal__body">
+        <div class="modal__field">
+          <label for="username">Usuário</label>
+          <input class="modal__input" type="text" id="username" name="username" required maxlength="150" />
+        </div>
+
+        <div class="modal__field">
+          <label for="email">Email</label>
+          <input class="modal__input" type="email" id="email" name="email" required />
+        </div>
+
+        <div class="modal__field">
+          <label for="phone">Celular (DDD + número)</label>
+          <input
+            class="modal__input"
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            pattern="\d{10,11}"
+            title="Somente dígitos, com DDD (ex: 21987654321)"
+          />
+        </div>
+
+        <div class="profile-card__divider"></div>
+        <p class="profile-card__hint">Deixe os campos de senha em branco para não alterá-la.</p>
+
+        <div class="modal__field">
+          <label for="current-password">Senha atual</label>
+          <div class="password-field">
+            <input class="modal__input" type="password" id="current-password" name="current-password" autocomplete="current-password" />
+            <button type="button" class="password-toggle" id="current-password-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
+          </div>
+        </div>
+
+        <div class="modal__row">
+          <div class="modal__field">
+            <label for="new-password">Nova senha</label>
+            <div class="password-field">
+              <input class="modal__input" type="password" id="new-password" name="new-password" autocomplete="new-password" />
+              <button type="button" class="password-toggle" id="new-password-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
+            </div>
+          </div>
+          <div class="modal__field">
+            <label for="new-password-confirm">Confirmar nova senha</label>
+            <div class="password-field">
+              <input class="modal__input" type="password" id="new-password-confirm" name="new-password-confirm" autocomplete="new-password" />
+              <button type="button" class="password-toggle" id="new-password-confirm-toggle" aria-label="Manter pressionado para mostrar a senha">👁</button>
+            </div>
+          </div>
+        </div>
+        <small class="field-hint">Mín. 8 caracteres, 1 maiúscula, 1 minúscula e 1 caractere especial.</small>
+
+        <div class="modal__footer">
+          <button type="button" class="modal__btn-cancel" id="cancel-edit-button">Cancelar</button>
+          <button type="submit" class="modal__btn-submit" id="submit-button">Salvar alterações</button>
+        </div>
+      </form>
+    </section>
   </main>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>

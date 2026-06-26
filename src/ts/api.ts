@@ -14,6 +14,12 @@ interface ProfileUpdatePayload {
   phone: string;
 }
 
+interface PasswordChangePayload {
+  current_password: string;
+  new_password: string;
+  new_password_confirm: string;
+}
+
 interface AuthTokens {
   access: string;
   refresh: string;
@@ -347,6 +353,13 @@ async function updateMe(payload: ProfileUpdatePayload): Promise<AuthUser> {
   return user;
 }
 
+async function changePassword(payload: PasswordChangePayload): Promise<void> {
+  const response = await apiFetch('/auth/password/change/', { method: 'POST', body: JSON.stringify(payload) });
+  if (!response.ok) {
+    throw new Error(await parseErrorMessage(response));
+  }
+}
+
 export {
   API_BASE_URL,
   apiFetch,
@@ -371,8 +384,18 @@ export {
   deletePlaybook,
   getMe,
   updateMe,
+  changePassword,
   saveTokens,
   clearTokens,
   PLAY_MAPS,
 };
-export type { AuthUser, Play, Playbook, PaginatedResponse, PlayPayload, PlaybookPayload, ProfileUpdatePayload };
+export type {
+  AuthUser,
+  Play,
+  Playbook,
+  PaginatedResponse,
+  PlayPayload,
+  PlaybookPayload,
+  ProfileUpdatePayload,
+  PasswordChangePayload,
+};
