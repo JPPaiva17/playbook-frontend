@@ -497,6 +497,16 @@
   min-height: 1.2rem;
 }
 
+.dash-success {
+  color: #3fb950;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+
+.dash-success:empty {
+  display: none;
+}
+
 /* ── Page header com search + filtro ── */
 .page-header {
   display: flex;
