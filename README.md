@@ -3,7 +3,7 @@
 Trabalho da disciplina de Programação para Web (PUC-Rio, 2026/1).
 
 **Integrantes:**
-- João Pedro Paiva — 2110801
+- João Pedro Paiva — 2110569
 - Breno Raisch — 2110039
 
 PlayBook é uma plataforma para jogadores de CS2 catalogarem e organizarem estratégias de jogo (execuções, defesas, anti-ecos, etc). O frontend é construído com HTML, CSS e TypeScript puros — sem frameworks JavaScript.
