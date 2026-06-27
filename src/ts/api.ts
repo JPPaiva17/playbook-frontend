@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://playbook-0vgy.onrender.com';
+const API_BASE_URL = 'https://playbook-0vgy.onrender.com/api';
 
 interface AuthUser {
   id: number;
