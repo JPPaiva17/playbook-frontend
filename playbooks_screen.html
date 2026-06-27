@@ -11,34 +11,57 @@
 
   <div id="appbar-root"></div>
 
-<main class="dash-main">
+  <main class="dash-main">
     <p class="dash-error" id="error-message"></p>
 
-    <div class="dash-welcome">
-      <h1 id="welcome-text">Olá!</h1>
-      <p>Gerencie suas coleções de estratégias.</p>
-    </div>
-
-    <div class="dash-stats">
-      <div class="stat-chip">
-        <i data-lucide="layers"></i>
-        <strong id="stat-playbooks">—</strong> playbooks
+    <div class="page-header">
+      <div class="page-header__title">
+        <h1>Playbooks <span class="section-count" id="count-playbooks">0</span></h1>
       </div>
-    </div>
+      <div class="page-header__controls">
+        <div class="search-bar">
+          <i data-lucide="search"></i>
+          <input type="text" id="search-input" placeholder="Buscar por nome..." autocomplete="off" />
+        </div>
 
-    <section class="dash-section">
-      <div class="dash-section__header">
-        <h2>
-          <i data-lucide="layers"></i>
-          Meus Playbooks
-          <span class="section-count" id="count-playbooks">0</span>
-        </h2>
-        <button class="dash-link" id="open-create-modal-2" style="background:none;border:none;cursor:pointer;font-size:inherit;">
-          <i data-lucide="plus"></i> Novo playbook
+        <div class="filter-wrapper">
+          <button class="filter-btn" id="filter-btn">
+            <i data-lucide="sliders-horizontal"></i>
+            Filtrar
+          </button>
+          <div class="filter-dropdown" id="filter-dropdown">
+            <div class="filter-section">
+              <label class="filter-label">Visibilidade</label>
+              <div class="filter-grenades">
+                <label class="filter-check">
+                  <input type="radio" name="pb-visibility" id="f-vis-all" value="" checked />
+                  Todos
+                </label>
+                <label class="filter-check">
+                  <input type="radio" name="pb-visibility" id="f-vis-public" value="public" />
+                  Públicos
+                </label>
+                <label class="filter-check">
+                  <input type="radio" name="pb-visibility" id="f-vis-private" value="private" />
+                  Privados
+                </label>
+              </div>
+            </div>
+            <div class="filter-footer">
+              <button type="button" class="modal__btn-cancel" id="filter-clear" style="padding:0.4rem 0.8rem;font-size:0.8rem;">Limpar</button>
+              <button type="button" class="modal__btn-submit" id="filter-apply" style="padding:0.4rem 0.8rem;font-size:0.8rem;">Aplicar</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-create" id="open-create-modal-2">
+          <i data-lucide="plus"></i>
+          <span>Novo Playbook</span>
         </button>
       </div>
-      <div id="playbooks-list" class="item-grid"></div>
-    </section>
+    </div>
+
+    <div id="playbooks-list" class="item-grid"></div>
   </main>
 
   <!-- Modal: criar / editar playbook -->

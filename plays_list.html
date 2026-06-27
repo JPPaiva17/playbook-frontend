@@ -89,6 +89,99 @@
     <div id="explore-grid" class="item-grid"></div>
   </main>
 
+  <!-- Modal: visualização de play -->
+  <div class="modal-overlay" id="play-view-modal" aria-hidden="true">
+    <div class="modal modal--play" role="dialog" aria-labelledby="pv-title">
+      <div class="modal__header">
+        <h2 class="modal__title" id="pv-title">—</h2>
+        <button class="modal__close" id="pv-close" aria-label="Fechar">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="play-modal__body">
+        <!-- Esquerda: vídeo -->
+        <div class="play-modal__left">
+          <div class="play-thumb" id="pv-thumb">
+            <div class="play-thumb__placeholder">
+              <i data-lucide="youtube"></i>
+              <span>Sem vídeo</span>
+            </div>
+          </div>
+          <a class="card-btn" id="pv-yt-link" target="_blank" rel="noopener"
+             style="display:none;margin-top:0.5rem;justify-content:center;">
+            <i data-lucide="youtube"></i> Assistir no YouTube
+          </a>
+        </div>
+
+        <!-- Direita: info + abas -->
+        <div class="play-modal__right">
+          <div class="pv-meta">
+            <span class="map-badge" id="pv-map" style="display:none"></span>
+            <span class="vis-badge" id="pv-vis"></span>
+            <span class="pv-author" id="pv-author"></span>
+          </div>
+
+          <div class="modal__tabs">
+            <button type="button" class="modal__tab active" data-pvtab="desc">Descrição</button>
+            <button type="button" class="modal__tab" data-pvtab="info">Detalhes</button>
+          </div>
+
+          <div class="modal__tab-panel" id="pvtab-desc">
+            <p class="pv-description" id="pv-description"></p>
+            <pre class="pv-content" id="pv-content"></pre>
+          </div>
+
+          <div class="modal__tab-panel hidden" id="pvtab-info">
+            <div class="pv-info-grid">
+              <div class="pv-info-row">
+                <span class="pv-info-label"><i data-lucide="map-pin"></i> Mapa</span>
+                <span id="pv-info-map">—</span>
+              </div>
+              <div class="pv-info-row">
+                <span class="pv-info-label"><i data-lucide="users"></i> Players</span>
+                <span id="pv-info-players">—</span>
+              </div>
+              <div class="pv-info-row">
+                <span class="pv-info-label"><i data-lucide="wind" class="grenade-icon--smoke"></i> Smokes</span>
+                <span id="pv-info-smokes">0</span>
+              </div>
+              <div class="pv-info-row">
+                <span class="pv-info-label"><i data-lucide="zap" class="grenade-icon--flash"></i> Flashbangs</span>
+                <span id="pv-info-flash">0</span>
+              </div>
+              <div class="pv-info-row">
+                <span class="pv-info-label"><i data-lucide="bomb" class="grenade-icon--he"></i> HE</span>
+                <span id="pv-info-he">0</span>
+              </div>
+              <div class="pv-info-row">
+                <span class="pv-info-label"><i data-lucide="flame" class="grenade-icon--molotov"></i> Molotovs</span>
+                <span id="pv-info-molotov">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: visualização de playbook -->
+  <div class="modal-overlay" id="pb-view-modal" aria-hidden="true">
+    <div class="modal modal--pb-view" role="dialog" aria-labelledby="pbv-title">
+      <div class="modal__header">
+        <div>
+          <h2 class="modal__title" id="pbv-title">—</h2>
+          <div class="pbv-meta" id="pbv-meta"></div>
+        </div>
+        <button class="modal__close" id="pbv-close" aria-label="Fechar">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <p class="pbv-description" id="pbv-description"></p>
+      <div class="pb-track-list" id="pbv-tracks"></div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>lucide.createIcons();</script>
   <script type="module" src="dist/js/plays_list.js"></script>

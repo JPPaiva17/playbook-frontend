@@ -25,6 +25,7 @@
   </nav>
 
   <!-- Hero -->
+  <section class="hero-section">
   <section class="hero">
     <div class="hero__content">
       <div class="hero__badge">CS2 Strategy Platform</div>
@@ -43,39 +44,91 @@
     </div>
 
     <div class="hero__visual">
-      <div class="demo-cards">
-        <div class="demo-card">
-          <div class="demo-card__header">
-            <span class="demo-map-badge">Inferno</span>
-            <span class="demo-visibility"><i data-lucide="lock"></i> Privado</span>
-          </div>
-          <div class="demo-card__title">Execute A — 3 Smokes</div>
-          <div class="demo-card__tags">
-            <span class="tag">execute</span>
-            <span class="tag">smoke</span>
-            <span class="tag">5v5</span>
-          </div>
-        </div>
+      <div class="demo-tree">
 
-        <div class="demo-card demo-card--secondary">
-          <div class="demo-card__header">
-            <span class="demo-map-badge demo-map-badge--mirage">Mirage</span>
+        <!-- Raiz: Playbook -->
+        <div class="tree-root">
+          <div class="tree-node tree-node--playbook">
+            <span class="tree-node__icon tree-node__icon--playbook">
+              <i data-lucide="layers"></i>
+            </span>
+            <div class="tree-node__info">
+              <span class="tree-node__label">Campeonato Interno</span>
+              <span class="tree-node__type">PLAYBOOK</span>
+            </div>
             <span class="demo-visibility"><i data-lucide="globe"></i> Público</span>
           </div>
-          <div class="demo-card__title">Anti-eco B — Rush Ramp</div>
-          <div class="demo-card__tags">
-            <span class="tag">anti-eco</span>
-            <span class="tag">rush</span>
+
+          <!-- Filhos: Plays -->
+          <div class="tree-children">
+
+            <div class="tree-branch">
+              <div class="tree-line">
+                <span class="tree-line__v"></span>
+                <span class="tree-line__h"></span>
+              </div>
+              <div class="tree-node tree-node--play">
+                <span class="tree-node__icon tree-node__icon--play">
+                  <i data-lucide="crosshair"></i>
+                </span>
+                <div class="tree-node__info">
+                  <span class="tree-node__label">Execute A — 3 Smokes</span>
+                  <span class="tree-node__meta">
+                    <span class="demo-map-badge">Inferno</span>
+                    <span class="tree-meta-item"><i data-lucide="users"></i> 5</span>
+                    <span class="tree-meta-item tree-meta-item--smoke"><i data-lucide="wind"></i> 3</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tree-branch">
+              <div class="tree-line">
+                <span class="tree-line__v"></span>
+                <span class="tree-line__h"></span>
+              </div>
+              <div class="tree-node tree-node--play">
+                <span class="tree-node__icon tree-node__icon--play">
+                  <i data-lucide="crosshair"></i>
+                </span>
+                <div class="tree-node__info">
+                  <span class="tree-node__label">Anti-eco B — Rush Ramp</span>
+                  <span class="tree-node__meta">
+                    <span class="demo-map-badge demo-map-badge--mirage">Mirage</span>
+                    <span class="tree-meta-item"><i data-lucide="users"></i> 3</span>
+                    <span class="tree-meta-item tree-meta-item--flash"><i data-lucide="zap"></i> 2</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tree-branch tree-branch--last">
+              <div class="tree-line tree-line--last">
+                <span class="tree-line__v tree-line__v--short"></span>
+                <span class="tree-line__h"></span>
+              </div>
+              <div class="tree-node tree-node--play">
+                <span class="tree-node__icon tree-node__icon--play">
+                  <i data-lucide="crosshair"></i>
+                </span>
+                <div class="tree-node__info">
+                  <span class="tree-node__label">Retake B — Postplant</span>
+                  <span class="tree-node__meta">
+                    <span class="demo-map-badge demo-map-badge--dust2">Dust 2</span>
+                    <span class="tree-meta-item"><i data-lucide="users"></i> 4</span>
+                    <span class="tree-meta-item tree-meta-item--molotov"><i data-lucide="flame"></i> 1</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="demo-card demo-card--tertiary">
-          <div class="demo-card__title"><i data-lucide="layers"></i> Playbook: Campeonato Interno</div>
-          <div class="demo-card__meta">8 plays · 3 mapas</div>
-        </div>
       </div>
     </div>
   </section>
+  </section><!-- /hero-section -->
 
   <!-- Features -->
   <section class="features">

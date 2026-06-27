@@ -11,8 +11,14 @@ initAppbar({ active: 'playbooks', createBtn: { id: 'open-create-modal', label: '
 // ── Elementos estáticos ──
 const errorBox       = document.getElementById('error-message')   as HTMLElement;
 const playbooksList  = document.getElementById('playbooks-list')  as HTMLElement;
-const statPlaybooks  = document.getElementById('stat-playbooks')  as HTMLElement;
 const countPlaybooks = document.getElementById('count-playbooks') as HTMLElement;
+
+// ── Search & Filter ──
+const searchInput    = document.getElementById('search-input')    as HTMLInputElement;
+const filterBtn      = document.getElementById('filter-btn')      as HTMLButtonElement;
+const filterDropdown = document.getElementById('filter-dropdown') as HTMLElement;
+const filterClear    = document.getElementById('filter-clear')    as HTMLButtonElement;
+const filterApply    = document.getElementById('filter-apply')    as HTMLButtonElement;
 
 // ── Modal ──
 const modal          = document.getElementById('playbook-modal') as HTMLElement;
@@ -174,7 +180,15 @@ function closePbViewModal(): void {
 
 pbViewClose.addEventListener('click', closePbViewModal);
 pbViewModal.addEventListener('click', (e) => { if (e.target === pbViewModal) closePbViewModal(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePbViewModal(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  // Fecha só o modal mais interno que estiver aberto
+  if (pbPlayModal.classList.contains('open')) {
+    closePbPlayModal();
+  } else if (pbViewModal.classList.contains('open')) {
+    closePbViewModal();
+  }
+});
 
 function buildCover(plays: Play[]): void {
   const thumbIds = plays
@@ -383,7 +397,6 @@ async function openViewPlaybook(id: number): Promise<void> {
 
     // Clique na track abre modal da play por cima
     pbTrackList.querySelectorAll<HTMLElement>('.pb-track').forEach((row) => {
-      row.style.cursor = 'pointer';
       row.addEventListener('click', (e) => {
         if ((e.target as HTMLElement).closest('.pb-track__yt-btn')) return;
         const play = plays.find((p) => p.id === Number(row.dataset.playId));
@@ -446,16 +459,63 @@ pbForm.addEventListener('submit', async (e) => {
 });
 
 // ── Render playbooks ──
+// ── Search & filter state ──
+let allPlaybooks: Playbook[] = [];
+let activeVisFilter = '';
+
+// Filter dropdown toggle
+filterBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const open = filterDropdown.classList.toggle('open');
+  filterBtn.classList.toggle('active', open);
+});
+document.addEventListener('click', () => {
+  filterDropdown.classList.remove('open');
+  filterBtn.classList.remove('active');
+});
+filterDropdown.addEventListener('click', (e) => e.stopPropagation());
+
+filterApply.addEventListener('click', () => {
+  const checked = filterDropdown.querySelector<HTMLInputElement>('input[name="pb-visibility"]:checked');
+  activeVisFilter = checked?.value ?? '';
+  filterDropdown.classList.remove('open');
+  filterBtn.classList.remove('active');
+  renderFiltered();
+});
+
+filterClear.addEventListener('click', () => {
+  const allRadio = document.getElementById('f-vis-all') as HTMLInputElement;
+  allRadio.checked = true;
+  activeVisFilter = '';
+  filterDropdown.classList.remove('open');
+  filterBtn.classList.remove('active');
+  renderFiltered();
+});
+
+searchInput.addEventListener('input', renderFiltered);
+
+function applyFilters(pbs: Playbook[]): Playbook[] {
+  const q = searchInput.value.toLowerCase().trim();
+  return pbs.filter((pb) => {
+    if (q && !pb.title.toLowerCase().includes(q) && !pb.description?.toLowerCase().includes(q)) return false;
+    if (activeVisFilter && pb.visibility !== activeVisFilter) return false;
+    return true;
+  });
+}
+
+function renderFiltered(): void {
+  renderPlaybooks(applyFilters(allPlaybooks));
+}
+
 function renderPlaybooks(playbooks: Playbook[]): void {
-  countPlaybooks.textContent = String(playbooks.length);
-  statPlaybooks.textContent  = String(playbooks.length);
+  countPlaybooks.textContent = String(applyFilters(allPlaybooks).length);
 
   if (playbooks.length === 0) {
     playbooksList.innerHTML = `
       <div class="dash-empty">
         <i data-lucide="layers"></i>
-        <span>Você ainda não criou nenhum playbook.</span>
-        <button class="dash-link open-create-empty" style="background:none;border:none;cursor:pointer;margin-top:0.25rem;">Criar meu primeiro playbook</button>
+        <span>${allPlaybooks.length === 0 ? 'Você ainda não criou nenhum playbook.' : 'Nenhum playbook encontrado.'}</span>
+        ${allPlaybooks.length === 0 ? '<button class="dash-link open-create-empty" style="background:none;border:none;cursor:pointer;margin-top:0.25rem;">Criar meu primeiro playbook</button>' : ''}
       </div>`;
     refreshIcons();
     playbooksList.querySelector<HTMLButtonElement>('.open-create-empty')?.addEventListener('click', async () => {
@@ -514,8 +574,9 @@ function renderPlaybooks(playbooks: Playbook[]): void {
 
 async function load(): Promise<void> {
   try {
-    const playbooks = await getMyPlaybooks();
-    renderPlaybooks(playbooks.results);
+    const data = await getMyPlaybooks();
+    allPlaybooks = data.results;
+    renderFiltered();
   } catch {
     playbooksList.innerHTML = '<div class="dash-empty">Erro ao carregar playbooks.</div>';
   }
