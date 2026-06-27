@@ -14,8 +14,8 @@ PlayBook é uma plataforma para jogadores de CS2 catalogarem e organizarem estra
 
 | | URL |
 |---|---|
-| 🌐 Site do frontend | `https://playbook-frontend.onrender.com` |
-| 🌐 Site do backend | `https://playbook-backend.onrender.com` |
+| 🌐 Site do frontend | `https://playbookg2.onrender.com` |
+| 🌐 Site do backend | `https://playbook-0vgy.onrender.com` |
 | 📦 Repositório frontend | `https://github.com/JPPaiva17/playbook-frontend` |
 | 📦 Repositório backend | `https://github.com/JPPaiva17/playbook-backend` |
 | 📖 Swagger (API docs) | `https://playbook-backend.onrender.com/api/docs/` |
@@ -25,24 +25,25 @@ PlayBook é uma plataforma para jogadores de CS2 catalogarem e organizarem estra
 ## Telas
 
 ### Homepage
-![Homepage](docs/screenshot-home.png)
 *Página inicial com hero section, cards demonstrativos e seção de features.*
+<img width="1814" height="1454" alt="image" src="https://github.com/user-attachments/assets/bde5ddb6-b67b-4812-bcaf-d85f32f75f49" />
+
 
 ### Explorar
-![Explorar](docs/screenshot-explorar.png)
 *Tela de exploração com toggle entre Plays e Playbooks, busca em tempo real e filtros por mapa e granadas.*
+<img width="1958" height="922" alt="image" src="https://github.com/user-attachments/assets/eab735a1-9ea8-41cd-b81b-5feddc0b91f2" />
 
 ### Minhas Plays
-![Minhas Plays](docs/screenshot-plays.png)
 *Dashboard de plays com criação via modal, preview de thumbnail do YouTube e filtros.*
+<img width="1884" height="738" alt="image" src="https://github.com/user-attachments/assets/5753543e-c78d-4538-a6e2-1379d3c8b69a" />
 
 ### Modal de criação de Play
-![Modal Play](docs/screenshot-modal-play.png)
 *Modal com duas colunas: thumbnail do vídeo à esquerda e abas Descrição / Settings à direita.*
+<img width="1354" height="912" alt="image" src="https://github.com/user-attachments/assets/96db0deb-8025-47cf-b1d8-73b56b9a3cf5" />
 
 ### Meus Playbooks
-![Meus Playbooks](docs/screenshot-playbooks.png)
 *Dashboard de playbooks com multiselect de plays e modal estilo playlist.*
+<img width="1944" height="646" alt="image" src="https://github.com/user-attachments/assets/d26b59d1-be83-4518-8cd7-fd20b7b28ce0" />
 
 ---
 
@@ -52,7 +53,6 @@ PlayBook é uma plataforma para jogadores de CS2 catalogarem e organizarem estra
 - **CSS3** — estilização com variáveis, grid, flexbox e glassmorphism
 - **TypeScript** — compilado para ES2020, sem bundler
 - **Lucide Icons** — biblioteca de ícones SVG (via CDN)
-- **Nginx** — servidor de arquivos estáticos (produção via Docker)
 
 ---
 
